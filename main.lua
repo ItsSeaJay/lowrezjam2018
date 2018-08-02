@@ -17,8 +17,14 @@ function love.update(deltaTime)
 end
 
 function love.draw(deltaTime)
+	-- Draw a high-resolution background to fill in the black bars
+	love.graphics.draw(background)
+
+	-- NOTE: Everything between maid.start() and maid.finish() is downscaled
+	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared
 	maid64.start()
-		love.graphics.draw(background)
+		-- Default to a black background
+		love.graphics.clear(0, 0, 0)
 		player:draw()
 	maid64.finish()
 end
@@ -29,4 +35,10 @@ function love.keypressed(key, scancode, isRepeat)
 	if key == "escape" then
 		love.event.quit()
 	end
+end
+
+function love.resize(width, height)
+    -- Alert maid64 that the width and height of the display changed so that
+    -- it can fill it properly
+    maid64.resize(width, height)
 end

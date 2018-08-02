@@ -1,8 +1,10 @@
 local class = require "lib.classic"
+local maid64 = require "lib.maid64"
+
 local Player = class:extend()
 
 function Player:new()
-	self.image = love.graphics.newImage("res/alien.png")
+	self.image = maid64.newImage("res/alien.png")
 end
 
 function Player:update(deltaTime)

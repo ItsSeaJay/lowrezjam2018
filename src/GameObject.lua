@@ -5,6 +5,8 @@ function GameObject:new()
 	self.destroyed = false
 end
 
+function GameObject:update(deltaTime) end
+
 function GameObject:draw()
 	love.graphics.draw(
 		self.image,

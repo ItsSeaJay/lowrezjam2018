@@ -34,12 +34,4 @@ function Player:update(deltaTime)
 	self.y = math.max(self.y, 0)
 end
 
-function Player:draw()
-	love.graphics.draw(
-		self.image,
-		self.x,
-		self.y
-	)
-end
-
 return Player

@@ -1,7 +1,8 @@
 local class = require "lib.classic"
 local maid64 = require "lib.maid64"
 
-local Player = class:extend()
+local GameObject = require "src.GameObject"
+local Player = GameObject:extend()
 
 function Player:new()
 	self.image = maid64.newImage("res/alien.png")

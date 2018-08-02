@@ -25,6 +25,7 @@ function love.draw(deltaTime)
 	maid64.start()
 		-- Default to a black background
 		love.graphics.clear(0, 0, 0)
+		-- TODO: make this draw a table of in-tact game objects agnostically
 		player:draw()
 	maid64.finish()
 end

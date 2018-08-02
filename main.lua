@@ -10,6 +10,8 @@ function love.load()
 	-- Using maid64 instead of love ensures that
 	-- nearest neighbor scaling is used
 	background = maid64.newImage("res/background.jpg")
+	backgroundWidth = 32
+	backgroundHeight = backgroundWidth
 end
 
 function love.update(deltaTime)
@@ -18,7 +20,16 @@ end
 
 function love.draw(deltaTime)
 	-- Draw a high-resolution background to fill in the black bars
-	love.graphics.draw(background)
+	love.graphics.draw(
+		background,
+		0, -- x
+		0, -- y
+		0, -- angle
+		1, -- xscale
+		1, -- yscale
+		backgroundWidth, -- xorigin
+		backgroundHeight -- yorigin
+	)
 
 	-- NOTE: Everything between maid.start() and maid.finish() is downscaled
 	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared

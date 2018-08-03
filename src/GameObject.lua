@@ -7,12 +7,20 @@ end
 
 function GameObject:update(deltaTime) end
 
-function GameObject:draw()
-	love.graphics.draw(
-		self.image,
-		self.x,
-		self.y
-	)
+function GameObject:draw(centred)
+	if centred then
+		love.graphics.draw(
+			self.image,
+			self.x - self.halfWidth,
+			self.y - self.halfHeight
+		)
+	else
+		love.graphics.draw(
+			self.image,
+			self.x,
+			self.y
+		)
+	end
 end
 
 return GameObject

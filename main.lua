@@ -8,7 +8,8 @@ function love.load()
 	maid64.setup(64) -- Scale to 64 pixels squared
 
 	gameObjects = {}
-	table.insert(gameObjects, Player())
+	playerObj = Player()
+	table.insert(gameObjects, playerObj)
 
 	-- Using maid64 instead of love ensures that
 	-- nearest neighbor scaling is used
@@ -19,6 +20,7 @@ function love.update(deltaTime)
 	for key, gameObject in pairs(gameObjects) do
 		gameObject:update(deltaTime)
 	end
+	camera:setPosition(playerObj.x, playerObj.y)
 end
 
 function love.draw(deltaTime)
@@ -32,7 +34,7 @@ function love.draw(deltaTime)
 			love.graphics.draw(background)
 			
 			for key, gameObject in pairs(gameObjects) do
-				gameObject:draw()
+				gameObject:draw(true)
 			end
 		end)
 	maid64.finish()

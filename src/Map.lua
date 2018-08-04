@@ -28,28 +28,31 @@ end
 function Map:collide(go)
 	-- Might update this later since it's kinda crappy on corners
 	-- Right
-	local x, y = self.stimap:convertPixelToTile(go.x + go.halfWidth, go.y)
-	local tile = self:safeGetTile(x, y)
-	if tile and tile.properties.physical then
-		go.x = (x)*self.stimap.tilewidth - go.halfWidth
-	end
-	-- Left
-	x, y = self.stimap:convertPixelToTile(go.x - go.halfWidth, go.y)
-	tile = self:safeGetTile(x, y)
-	if tile and tile.properties.physical then
-		go.x = (x+1)*self.stimap.tilewidth + go.halfWidth
-	end
-	-- Up
-	x, y = self.stimap:convertPixelToTile(go.x, go.y - go.halfHeight)
-	tile = self:safeGetTile(x, y)
-	if tile and tile.properties.physical then
-		go.y = (y+1)*self.stimap.tileheight + go.halfHeight
-	end
-	-- Down
-	x, y = self.stimap:convertPixelToTile(go.x, go.y + go.halfHeight)
-	tile = self:safeGetTile(x, y)
-	if tile and tile.properties.physical then
-		go.y = (y)*self.stimap.tileheight - go.halfHeight
+	local x, y, tile
+	for i = -5, 5, 5 do
+		x, y = self.stimap:convertPixelToTile(go.x + go.halfWidth, go.y + i)
+		tile = self:safeGetTile(x, y)
+		if tile and tile.properties.physical then
+			go.x = (x)*self.stimap.tilewidth - go.halfWidth
+		end
+		-- Left
+		x, y = self.stimap:convertPixelToTile(go.x - go.halfWidth, go.y + i)
+		tile = self:safeGetTile(x, y)
+		if tile and tile.properties.physical then
+			go.x = (x+1)*self.stimap.tilewidth + go.halfWidth
+		end
+		-- Up
+		x, y = self.stimap:convertPixelToTile(go.x + i, go.y - go.halfHeight)
+		tile = self:safeGetTile(x, y)
+		if tile and tile.properties.physical then
+			go.y = (y+1)*self.stimap.tileheight + go.halfHeight
+		end
+		-- Down
+		x, y = self.stimap:convertPixelToTile(go.x + i, go.y + go.halfHeight)
+		tile = self:safeGetTile(x, y)
+		if tile and tile.properties.physical then
+			go.y = (y)*self.stimap.tileheight - go.halfHeight
+		end
 	end
 end
 

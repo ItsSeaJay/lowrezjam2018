@@ -33,8 +33,8 @@ function Player:update(deltaTime)
 	end
 
 	-- Clamp the player's position
-	self.x = helper.clamp(self.x, self.halfWidth, 128 - self.halfWidth)
-	self.y = helper.clamp(self.y, self.halfHeight, 128 - self.halfHeight)
+	self.x = helper.clamp(self.x, self.halfWidth, 512 - self.halfWidth)
+	self.y = helper.clamp(self.y, self.halfHeight, 512 - self.halfHeight)
 end
 
 return Player

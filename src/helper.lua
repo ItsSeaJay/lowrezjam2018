@@ -1,5 +1,6 @@
---Helper functions
+-- Helper functions
 local helper = {}
+
 function helper.clamp(value, lower, upper)
 	if value < lower then
 		return lower

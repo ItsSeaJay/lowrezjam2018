@@ -25,11 +25,18 @@ function Map:safeGetTile(x, y)
 	return nil
 end
 
+function Map:getWidth()
+	return self.stimap.tilewidth * self.mainLayer.width
+end
+
+function Map:getHeight()
+	return self.stimap.tileheight * self.mainLayer.height
+end
+
 function Map:collide(go)
-	-- Might update this later since it's kinda crappy on corners
-	-- Right
 	local x, y, tile
 	for i = -5, 5, 5 do
+		-- Right
 		x, y = self.stimap:convertPixelToTile(go.x + go.halfWidth, go.y + i)
 		tile = self:safeGetTile(x, y)
 		if tile and tile.properties.physical then

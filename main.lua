@@ -4,6 +4,12 @@ local Player = require "src.Player"
 local Map = require "src.Map"
 local camera = require "src.camera"
 
+function setmap(name)
+	currentMap = maps[name]
+	camera:setWorld(0, 0, currentMap:getWidth(), currentMap:getHeight())
+	playerObj:setWorld(currentMap:getWidth(), currentMap:getHeight())
+end
+
 function love.load()
 	maid64.setup(64) -- Scale to 64 pixels squared
 
@@ -12,9 +18,8 @@ function love.load()
 	table.insert(gameObjects, playerObj)
 
 	maps = {}
-	testmap = Map("res/testmap.lua")
-	table.insert(maps, testmap)
-	currentMap = testmap
+	maps["testmap"] = Map("res/testmap.lua")
+	setmap("testmap")
 
 	-- Using maid64 instead of love ensures that
 	-- nearest neighbor scaling is used

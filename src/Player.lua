@@ -12,6 +12,8 @@ function Player:new()
 	self.halfWidth = self.image:getWidth() / 2
 	self.halfHeight = self.image:getHeight() / 2
 	self.speed = 32
+	self.worldRight = 512
+	self.worldBottom = 512
 end
 
 function Player:update(deltaTime)
@@ -33,8 +35,13 @@ function Player:update(deltaTime)
 	end
 
 	-- Clamp the player's position
-	self.x = helper.clamp(self.x, self.halfWidth, 512 - self.halfWidth)
-	self.y = helper.clamp(self.y, self.halfHeight, 512 - self.halfHeight)
+	self.x = helper.clamp(self.x, self.halfWidth, self.worldRight - self.halfWidth)
+	self.y = helper.clamp(self.y, self.halfHeight, self.worldBottom - self.halfHeight)
+end
+
+function Player:setWorld(r, b)
+	self.worldRight = r
+	self.worldBottom = b
 end
 
 return Player

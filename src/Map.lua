@@ -6,7 +6,7 @@ local Map = class:extend()
 
 function Map:new(mapLocation)
 	self.stimap = sti(mapLocation)
-	self.mainLayer = self.stimap.layers["Tile Layer 1"]
+	self.mainLayer = self.stimap.layers[1]
 end
 
 function Map:update(dt)

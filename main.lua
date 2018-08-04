@@ -1,14 +1,21 @@
-local gamera = require "lib.gamera"
 local maid64 = require "lib.maid64"
+local anim8 = require "lib.anim8"
 
-local Player = require "src.Player"
+local Map = require "src.Map"
+local camera = require "src.camera"
+
+function setmap(name)
+	currentMap = maps[name]
+	camera:setWorld(0, 0, currentMap:getWidth(), currentMap:getHeight())
+	currentMap:getPlayer():setWorld(currentMap:getWidth(), currentMap:getHeight())
+end
 
 function love.load()
-	maid64.setup(64) -- Scale to 64 pixels squared
+	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
-	player = Player()
-	camera = gamera.new(0, 0, 128, 128)
-	camera:setWindow(0, 0, 64, 64)
+	maps = {}
+	maps["testmap"] = Map("res/testmap.lua")
+	setmap("testmap")
 
 	-- Using maid64 instead of love ensures that
 	-- nearest neighbor scaling is used
@@ -16,28 +23,32 @@ function love.load()
 end
 
 function love.update(deltaTime)
-	player:update(deltaTime)
-	camera:setPosition(player.x, player.y)
+	currentMap:update(deltaTime)
+
+	-- Follow player always
+	-- NOTE: We're probably going to want some kind of dynamic camera soon,
+	--       but this will do for now
+	camera:setPosition(currentMap:getPlayer().x, currentMap:getPlayer().y)
 end
 
 function love.draw(deltaTime)
 	-- NOTE: Everything between maid.start() and maid.finish() is downscaled
 	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared
 	maid64.start()
+		-- NOTE: User interfaces can be drawn here with absolute positions
+
 		camera:draw(function (left, top, width, height)
 			-- Default to a black background
 			love.graphics.clear(0, 0, 0)
 			-- Draw a simple background to show movement from the camera
 			love.graphics.draw(background)
-			-- TODO: make this draw a table of in-tact game objects agnostically
-			player:draw()
+			currentMap:draw(-left, -top) -- STI needs offsets passed to it directly
 		end)
 	maid64.finish()
 end
 
 function love.keypressed(key, scancode, isRepeat)
-	-- TODO: remove this before the game ships, or replace it with a different
-	--       system
+	-- TODO: remove this before the game ships, or replace it
 	if key == "escape" then
 		love.event.quit()
 	end

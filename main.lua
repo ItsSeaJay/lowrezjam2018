@@ -1,4 +1,5 @@
 local maid64 = require "lib.maid64"
+local anim8 = require "lib.anim8"
 
 local Map = require "src.Map"
 local camera = require "src.camera"
@@ -16,6 +17,11 @@ function love.load()
 	maps["testmap"] = Map("res/testmap.lua")
 	setmap("testmap")
 
+	-- TODO: Remove this test animation from the game
+	coin = love.graphics.newImage('res/coin.png')
+	local g = anim8.newGrid(8, 8, coin:getWidth(), coin:getHeight())
+	animation = anim8.newAnimation(g('1-2', 1), 0.1)
+
 	-- Using maid64 instead of love ensures that
 	-- nearest neighbor scaling is used
 	background = maid64.newImage("res/background.jpg")
@@ -23,7 +29,12 @@ end
 
 function love.update(deltaTime)
 	currentMap:update(deltaTime)
+
+	animation:update(deltaTime)
+
 	-- Follow player always
+	-- NOTE: We're probably going to want some kind of dynamic camera soon,
+	--       but this will do for now
 	camera:setPosition(currentMap:getPlayer().x, currentMap:getPlayer().y)
 end
 
@@ -39,6 +50,8 @@ function love.draw(deltaTime)
 			currentMap:draw(-left, -top) -- STI needs offsets passed to it directly
 		end)
 	maid64.finish()
+
+	animation:draw(coin, 100, 200)
 end
 
 function love.keypressed(key, scancode, isRepeat)

@@ -1,20 +1,34 @@
 local class = require "lib.classic"
 local sti = require "lib.sti"
-local helper = require "src.helper"
+local Player = require "src.Player"
 
 local Map = class:extend()
 
 function Map:new(mapLocation)
 	self.stimap = sti(mapLocation)
 	self.mainLayer = self.stimap.layers[1]
+	self.gameObjects = {}
+	self.playerObj = Player()
+	table.insert(self.gameObjects, self.playerObj)
 end
 
 function Map:update(dt)
     self.stimap:update(dt)
+	for _, gameObject in pairs(self.gameObjects) do
+		gameObject:update(dt)
+		self:collide(gameObject)
+	end
 end
 
 function Map:draw(tx, ty, sx, sy)
     self.stimap:draw(tx, ty, sx, sy)
+	for _, gameObject in pairs(self.gameObjects) do
+		gameObject:draw(true)
+	end
+end
+
+function Map:getPlayer()
+	return self.playerObj
 end
 
 function Map:safeGetTile(x, y)

@@ -1,21 +1,16 @@
 local maid64 = require "lib.maid64"
 
-local Player = require "src.Player"
 local Map = require "src.Map"
 local camera = require "src.camera"
 
 function setmap(name)
 	currentMap = maps[name]
 	camera:setWorld(0, 0, currentMap:getWidth(), currentMap:getHeight())
-	playerObj:setWorld(currentMap:getWidth(), currentMap:getHeight())
+	currentMap:getPlayer():setWorld(currentMap:getWidth(), currentMap:getHeight())
 end
 
 function love.load()
 	maid64.setup(64) -- Scale to 64 pixels squared
-
-	gameObjects = {}
-	playerObj = Player()
-	table.insert(gameObjects, playerObj)
 
 	maps = {}
 	maps["testmap"] = Map("res/testmap.lua")
@@ -28,12 +23,8 @@ end
 
 function love.update(deltaTime)
 	currentMap:update(deltaTime)
-	for key, gameObject in pairs(gameObjects) do
-		gameObject:update(deltaTime)
-		currentMap:collide(gameObject)
-	end
 	-- Follow player always
-	camera:setPosition(playerObj.x, playerObj.y)
+	camera:setPosition(currentMap:getPlayer().x, currentMap:getPlayer().y)
 end
 
 function love.draw(deltaTime)
@@ -46,9 +37,6 @@ function love.draw(deltaTime)
 			-- Draw a simple background to show movement from the camera
 			love.graphics.draw(background)
 			currentMap:draw(-left, -top) -- STI needs offsets passed to it directly
-			for key, gameObject in pairs(gameObjects) do
-				gameObject:draw(true)
-			end
 		end)
 	maid64.finish()
 end

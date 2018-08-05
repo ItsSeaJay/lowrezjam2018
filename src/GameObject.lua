@@ -11,20 +11,16 @@ function GameObject:update(deltaTime)
 	self.animation:update(deltaTime)
 end
 
-function GameObject:draw(centred)
-	if centred then
+function GameObject:draw()
+	if self.animation ~= nil then
 		self.animation:draw(
 			self.spritesheet,
-			self.x - self.halfWidth,
-			self.y - self.halfHeight
-		)
-	else
-		self.animation:draw(
-			self.spritesheet,
-			self.x,
-			self.y
+			self.x - (self.cel.width / 2),
+			self.y - (self.cel.height / 2)
 		)
 	end
+
+	-- TODO: add support for static graphics
 end
 
 return GameObject

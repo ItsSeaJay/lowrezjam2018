@@ -5,8 +5,11 @@ local helper = require "src.helper"
 local directions = require "src.cardinalDirections"
 
 local GameObject = require "src.GameObject"
-local BoundingBox = require "src.BoundingBox"
+local Rectangle = require "src.Rectangle"
 local Player = GameObject:extend()
+
+local celWidth = 16
+local celHeight = celWidth
 
 function Player:new()
 	-- Get a reference to the spritesheet image for the player
@@ -14,14 +17,16 @@ function Player:new()
 	
 	-- Create a table for all of the animations that the player will use
 	-- TODO: Make a function for this using loops
+	self.cel = Rectangle(celWidth, celHeight)
 	self.animations = self:getAnimations()
 
 	-- Set a default animation
 	self.animation = self.animations.walkDown
+
 	self.direction = directions.down
 	self.x = 0
 	self.y = 0
-	self.boundingBox = BoundingBox(6, 12)
+	self.boundingBox = Rectangle(6, 12)
 	self.speed = 32
 	self.worldRight = 512
 	self.worldBottom = 512
@@ -57,8 +62,16 @@ function Player:update(deltaTime)
 	end
 
 	-- Clamp the player's position
-	self.x = helper.clamp(self.x, self.halfWidth, self.worldRight - self.halfWidth)
-	self.y = helper.clamp(self.y, self.halfHeight, self.worldBottom - self.halfHeight)
+	self.x = helper.clamp(
+		self.x,
+		(self.boundingBox.width / 2),
+		self.worldRight - (self.boundingBox.width / 2)
+	)
+	self.y = helper.clamp(
+		self.y,
+		(self.boundingBox.height / 2),
+		self.worldBottom - (self.boundingBox.height / 2)
+	)
 
 	if self.direction == directions.up and moving then
 		self.animation = self.animations.walkUp
@@ -78,8 +91,6 @@ function Player:update(deltaTime)
 end
 
 function Player:getAnimations()
-	local celWidth = 16
-	local celHeight = celWidth
 	-- Cut that spritesheet up into a grid
 	local grid = anim8.newGrid(
 		celWidth, -- Cel width

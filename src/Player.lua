@@ -1,7 +1,7 @@
 local class = require "lib.classic"
 local maid64 = require "lib.maid64"
 local anim8 = require "lib.anim8"
-local helper = require "src.helper"
+local lume = require "lib.lume"
 local directions = require "src.cardinalDirections"
 
 local GameObject = require "src.GameObject"
@@ -12,8 +12,7 @@ local Player = GameObject:extend()
 local celWidth = 16
 local celHeight = celWidth
 
-function Player:new()	
-	-- Create a table for all of the animations that the player will use
+function Player:new()
 	self.cel = Rectangle(celWidth, celHeight)
 	self.animations = anim8.getAnimations({
 		-- Idling
@@ -26,18 +25,34 @@ function Player:new()
 			duration = 2
 		},
 		idleLeft = {
-			path = "res/player/idle/up.png",
+			path = "res/player/idle/left.png",
 			duration = 2
 		},
 		idleRight = {
-			path = "res/player/idle/down.png",
+			path = "res/player/idle/right.png",
 			duration = 2
+		},
+		-- Walking
+		walkUp = {
+			path = "res/player/walk/up.png",
+			duration = 0.1
+		},
+		walkDown = {
+			path = "res/player/walk/down.png",
+			duration = 0.1
+		},
+		walkLeft = {
+			path = "res/player/walk/left.png",
+			duration = 0.1
+		},
+		walkRight = {
+			path = "res/player/walk/right.png",
+			duration = 0.1
 		}
 	},
 	celWidth,
 	celHeight)
 
-	-- Create a finite state machine of first class functions
 	self.states = {}
 	self.states.normal = function (deltaTime)
 		local up = love.keyboard.isDown("w") or love.keyboard.isDown("up")
@@ -50,28 +65,32 @@ function Player:new()
 		-- Horizontal
 		if up then
 			self.y = self.y - self.speed * deltaTime
-			self.direction = directions.up
+			self.animation = self.animations.walkUp
 		elseif down then
 			self.y = self.y + self.speed * deltaTime
-			self.direction = directions.down
+			self.animation = self.animations.walkDown
 		end
 
 		-- Vertical
 		if left then
 			self.x = self.x - self.speed * deltaTime
-			self.direction = directions.left
+			self.animation = self.animations.walkLeft
 		elseif right then
 			self.x = self.x + self.speed * deltaTime
-			self.direction = directions.right
+			self.animation = self.animations.walkRight
+		end
+
+		if not moving then
+			self.animation = self.animations.idleDown
 		end
 
 		-- Clamp the player's position within the current world
-		self.x = helper.clamp(
+		self.x = lume.clamp(
 			self.x,
 			(self.boundingBox.width / 2),
 			self.worldRight - (self.boundingBox.width / 2)
 		)
-		self.y = helper.clamp(
+		self.y = lume.clamp(
 			self.y,
 			(self.boundingBox.height / 2),
 			self.worldBottom - (self.boundingBox.height / 2)

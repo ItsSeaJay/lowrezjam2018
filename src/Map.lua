@@ -14,6 +14,7 @@ end
 
 function Map:update(dt)
     self.stimap:update(dt)
+    
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:update(dt)
 		self:collide(gameObject)
@@ -22,6 +23,7 @@ end
 
 function Map:draw(tx, ty, sx, sy)
     self.stimap:draw(tx, ty, sx, sy)
+
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:draw(true)
 	end
@@ -49,30 +51,31 @@ end
 
 function Map:collide(go)
 	local x, y, tile
+
 	for i = -5, 5, 5 do
 		-- Right
-		x, y = self.stimap:convertPixelToTile(go.x + go.halfWidth, go.y + i)
+		x, y = self.stimap:convertPixelToTile(go.x + go.boundingBox.width / 2, go.y + i)
 		tile = self:safeGetTile(x, y)
 		if tile and tile.properties.physical then
-			go.x = (x)*self.stimap.tilewidth - go.halfWidth
+			go.x = (x)*self.stimap.tilewidth - go.boundingBox.width / 2
 		end
 		-- Left
-		x, y = self.stimap:convertPixelToTile(go.x - go.halfWidth, go.y + i)
+		x, y = self.stimap:convertPixelToTile(go.x - go.boundingBox.width / 2, go.y + i)
 		tile = self:safeGetTile(x, y)
 		if tile and tile.properties.physical then
-			go.x = (x+1)*self.stimap.tilewidth + go.halfWidth
+			go.x = (x+1)*self.stimap.tilewidth + go.boundingBox.width / 2
 		end
 		-- Up
-		x, y = self.stimap:convertPixelToTile(go.x + i, go.y - go.halfHeight)
+		x, y = self.stimap:convertPixelToTile(go.x + i, go.y - go.boundingBox.height / 2)
 		tile = self:safeGetTile(x, y)
 		if tile and tile.properties.physical then
-			go.y = (y+1)*self.stimap.tileheight + go.halfHeight
+			go.y = (y+1)*self.stimap.tileheight + go.boundingBox.height / 2
 		end
 		-- Down
-		x, y = self.stimap:convertPixelToTile(go.x + i, go.y + go.halfHeight)
+		x, y = self.stimap:convertPixelToTile(go.x + i, go.y + go.boundingBox.height / 2)
 		tile = self:safeGetTile(x, y)
 		if tile and tile.properties.physical then
-			go.y = (y)*self.stimap.tileheight - go.halfHeight
+			go.y = (y)*self.stimap.tileheight - go.boundingBox.height / 2
 		end
 	end
 end

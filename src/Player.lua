@@ -5,6 +5,7 @@ local helper = require "src.helper"
 local directions = require "src.cardinalDirections"
 
 local GameObject = require "src.GameObject"
+local BoundingBox = require "src.BoundingBox"
 local Player = GameObject:extend()
 
 function Player:new()
@@ -20,8 +21,7 @@ function Player:new()
 	self.direction = directions.down
 	self.x = 0
 	self.y = 0
-	self.halfWidth = 8
-	self.halfHeight = 8
+	self.boundingBox = BoundingBox(6, 12)
 	self.speed = 32
 	self.worldRight = 512
 	self.worldBottom = 512

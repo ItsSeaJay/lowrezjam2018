@@ -4,7 +4,7 @@ local anim8 = require "lib.anim8"
 local Map = require "src.Map"
 local camera = require "src.camera"
 
-function setmap(name)
+function setMap(name)
 	currentMap = maps[name]
 	camera:setWorld(0, 0, currentMap:getWidth(), currentMap:getHeight())
 	currentMap:getPlayer():setWorld(currentMap:getWidth(), currentMap:getHeight())
@@ -15,7 +15,7 @@ function love.load()
 
 	maps = {}
 	maps["testmap"] = Map("res/testmap.lua")
-	setmap("testmap")
+	setMap("testmap")
 
 	-- Using maid64 instead of love ensures that
 	-- nearest neighbor scaling is used
@@ -40,8 +40,6 @@ function love.draw(deltaTime)
 		camera:draw(function (left, top, width, height)
 			-- Default to a black background
 			love.graphics.clear(0, 0, 0)
-			-- Draw a simple background to show movement from the camera
-			love.graphics.draw(background)
 			currentMap:draw(-left, -top) -- STI needs offsets passed to it directly
 		end)
 	maid64.finish()

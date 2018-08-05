@@ -23,4 +23,9 @@ function GameObject:draw()
 	-- TODO: add support for static graphics
 end
 
+function GameObject:setWorld(right, bottom)
+	self.worldRight = right
+	self.worldBottom = bottom
+end
+
 return GameObject

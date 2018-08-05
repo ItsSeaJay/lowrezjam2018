@@ -137,9 +137,4 @@ function Player:getAnimations()
 	return animations
 end
 
-function Player:setWorld(right, bottom)
-	self.worldRight = right
-	self.worldBottom = bottom
-end
-
 return Player

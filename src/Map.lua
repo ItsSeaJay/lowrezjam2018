@@ -42,18 +42,17 @@ function Map:safeGetTile(x, y)
 	return nil
 end
 
-function Map:getWidth()
-	return self.stimap.tilewidth * self.mainLayer.width
-end
-
-function Map:getHeight()
-	return self.stimap.tileheight * self.mainLayer.height
+function Map:getDimensions()
+	return self.stimap.tilewidth * self.mainLayer.width, self.stimap.tileheight * self.mainLayer.height
 end
 
 function Map:collide(go)
+	if not go.boundingBox then
+		do return end
+	end
 	local x, y, tile
-
-	for i = -5, 5, 5 do
+	local n = math.floor(go.boundingBox.height / 2) - 1
+	for i = -n, n, n do
 		-- Right
 		x, y = self.stimap:convertPixelToTile(go.x + go.boundingBox.width / 2, go.y + i)
 		tile = self:safeGetTile(x, y)
@@ -66,6 +65,9 @@ function Map:collide(go)
 		if tile and tile.properties.physical then
 			go.x = (x+1)*self.stimap.tilewidth + go.boundingBox.width / 2
 		end
+	end
+	n = math.floor(go.boundingBox.width / 2) - 1
+	for i = -n, n, n do
 		-- Up
 		x, y = self.stimap:convertPixelToTile(go.x + i, go.y - go.boundingBox.height / 2)
 		tile = self:safeGetTile(x, y)

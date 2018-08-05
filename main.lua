@@ -5,9 +5,10 @@ local Map = require "src.Map"
 local camera = require "src.camera"
 
 function setMap(name)
+	currentMap.nextMap = nil
 	currentMap = maps[name]
-	camera:setWorld(0, 0, currentMap:getWidth(), currentMap:getHeight())
-	currentMap:getPlayer():setWorld(currentMap:getWidth(), currentMap:getHeight())
+	camera:setWorld(0, 0, currentMap:getDimensions())
+	currentMap:getPlayer():setWorld(currentMap:getDimensions())
 end
 
 function love.load()
@@ -15,6 +16,7 @@ function love.load()
 
 	maps = {}
 	maps["testmap"] = Map("res/testmap.lua")
+	currentMap = {}
 	setMap("testmap")
 
 	-- Using maid64 instead of love ensures that
@@ -23,6 +25,9 @@ function love.load()
 end
 
 function love.update(deltaTime)
+	if currentMap.nextMap then
+		setMap(currentMap.nextMap)
+	end
 	currentMap:update(deltaTime)
 
 	-- Follow player always

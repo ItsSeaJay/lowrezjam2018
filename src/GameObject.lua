@@ -8,19 +8,25 @@ function GameObject:new()
 end
 
 function GameObject:update(deltaTime)
-	self.animation:update(deltaTime)
+	if self.animation then
+		self.animation:update(deltaTime)
+	end
 end
 
 function GameObject:draw()
-	if self.animation ~= nil then
+	if self.animation then
 		self.animation:draw(
 			self.spritesheet,
 			self.x - (self.cel.width / 2),
 			self.y - (self.cel.height / 2)
 		)
+	else
+		love.graphics.draw(
+			self.image,
+			self.x - (self.cel.width / 2),
+			self.y - (self.cel.width / 2)
+		)
 	end
-
-	-- TODO: add support for static graphics
 end
 
 function GameObject:setWorld(right, bottom)

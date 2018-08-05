@@ -11,17 +11,15 @@ local Player = GameObject:extend()
 local celWidth = 16
 local celHeight = celWidth
 
-function Player:new()
-	-- Get a reference to the spritesheet image for the player
-	self.spritesheet = maid64.newImage("res/player.png")
-	
+function Player:new()	
 	-- Create a table for all of the animations that the player will use
 	-- TODO: Make a function for this using loops
 	self.cel = Rectangle(celWidth, celHeight)
 	self.animations = self:getAnimations()
 
 	-- Set a default animation
-	self.animation = self.animations.walkDown
+	self.animation = nil
+	self.image = maid64.newImage("res/alien.png")
 
 	self.direction = directions.down
 	self.x = 0
@@ -73,21 +71,21 @@ function Player:update(deltaTime)
 		self.worldBottom - (self.boundingBox.height / 2)
 	)
 
-	if self.direction == directions.up and moving then
-		self.animation = self.animations.walkUp
-	elseif self.direction == directions.down and moving then
-		self.animation = self.animations.walkDown
-	elseif self.direction == directions.left and moving then
-		self.animation = self.animations.walkLeft
-	elseif self.direction == directions.right and moving then
-		self.animation = self.animations.walkRight
-	end
+	-- if self.direction == directions.up and moving then
+	-- 	self.animation = self.animations.walkUp
+	-- elseif self.direction == directions.down and moving then
+	-- 	self.animation = self.animations.walkDown
+	-- elseif self.direction == directions.left and moving then
+	-- 	self.animation = self.animations.walkLeft
+	-- elseif self.direction == directions.right and moving then
+	-- 	self.animation = self.animations.walkRight
+	-- end
 
-	if moving then
-		self.animation:resume()
-	else
-		self.animation:pause()
-	end
+	-- if moving then
+	-- 	self.animation:resume()
+	-- else
+	-- 	self.animation:pause()
+	-- end
 end
 
 function Player:draw()
@@ -95,44 +93,24 @@ function Player:draw()
 end
 
 function Player:getAnimations()
-	-- Cut that spritesheet up into a grid
-	local grid = anim8.newGrid(
-		celWidth, -- Cel width
-		celHeight, -- Cel height
-		self.spritesheet:getWidth(), -- Spritesheet width
-		self.spritesheet:getHeight() -- Spritesheet height
-	)
 	local animations = {}
 
+	-- Cut that spritesheet up into a grid
+	-- local grid = anim8.newGrid(
+	-- 	celWidth, -- Cel width
+	-- 	celHeight, -- Cel height
+	-- 	self.spritesheet:getWidth(), -- Spritesheet width
+	-- 	self.spritesheet:getHeight() -- Spritesheet height
+	-- )
+
 	-- Walking
-	animations.walkDown = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			1 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	animations.walkUp = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			4 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	animations.walkLeft = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			3 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	animations.walkRight = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			2 -- Row
-		),
-		0.1 -- Duration per cel
-	)
+	-- animations.walkDown = anim8.newAnimation(
+	-- 	grid(
+	-- 		'1-8', -- Cels used
+	-- 		1 -- Row
+	-- 	),
+	-- 	0.1 -- Duration per cel
+	-- )
 
 	return animations
 end

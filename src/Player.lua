@@ -16,14 +16,15 @@ function Player:new()
 	-- Create a table for all of the animations that the player will use
 	self.cel = Rectangle(celWidth, celHeight)
 	self.animations = self:getAnimations({
-		walkUp = "res/player/walk/up.png",
-		walkDown = "res/player/walk/down.png"
+		-- Idling
+		idleUp = {
+			path = "res/player/idle/down.png",
+			duration = 1
+		}
 	})
 
 	-- Set a default animation
-	self.animation = self.animations.walkUp
-	self.image = maid64.newImage("res/alien.png")
-
+	self.animation = self.animations.idleUp
 	self.direction = directions.down
 	self.x = 0
 	self.y = 0
@@ -79,13 +80,13 @@ function Player:draw()
 	self.super.draw(self)
 end
 
-function Player:getAnimations(paths)
+function Player:getAnimations(data)
 	local animations = {}
 
 	-- Create new animations for each spritesheet found
-	for key, path in pairs(paths) do
-		if love.filesystem.getInfo(path) then
-			local spritesheet = love.graphics.newImage(path)
+	for key, animation in pairs(data) do
+		if love.filesystem.getInfo(animation.path or "") then
+			local spritesheet = maid64.newImage(animation.path or "res/alien.png")
 			local grid = anim8.newGrid(
 				self.cel.width,
 				self.cel.height,
@@ -94,13 +95,17 @@ function Player:getAnimations(paths)
 			)
 			-- NOTE: The cel width must fit into the spritesheet exactly
 			local range = '1-' .. (spritesheet:getWidth() / self.cel.width)
-			local duration = 0.1
+			local duration = animations
 			local animation = anim8.newAnimation(
 				grid:getFrames(
 					range,
 					1 -- Row
+
+					-- NOTE: This is designed to work with horizontal strips of
+					--       individual animations. There's no reason why this
+					--       shouldn't be on the top row.
 				),
-				duration
+				animation.duration or 1 -- Default to 1 second
 			)
 
 			-- Store the animation info in the table under the specified key

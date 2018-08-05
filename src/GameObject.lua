@@ -9,14 +9,14 @@ end
 
 function GameObject:update(deltaTime)
 	if self.animation then
-		self.animation:update(deltaTime)
+		self.animation.motion:update(deltaTime)
 	end
 end
 
 function GameObject:draw()
 	if self.animation then
-		self.animation:draw(
-			self.spritesheet,
+		self.animation.motion:draw(
+			self.animation.spritesheet,
 			self.x - (self.cel.width / 2),
 			self.y - (self.cel.height / 2)
 		)

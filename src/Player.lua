@@ -18,7 +18,7 @@ function Player:new()
 	self.animations = self:getAnimations()
 
 	-- Set a default animation
-	self.animation = nil
+	self.animation = self.animations.walkUp
 	self.image = maid64.newImage("res/alien.png")
 
 	self.direction = directions.down
@@ -59,7 +59,7 @@ function Player:update(deltaTime)
 		self.direction = directions.right
 	end
 
-	-- Clamp the player's position
+	-- Clamp the player's position within the current world
 	self.x = helper.clamp(
 		self.x,
 		(self.boundingBox.width / 2),
@@ -70,22 +70,6 @@ function Player:update(deltaTime)
 		(self.boundingBox.height / 2),
 		self.worldBottom - (self.boundingBox.height / 2)
 	)
-
-	-- if self.direction == directions.up and moving then
-	-- 	self.animation = self.animations.walkUp
-	-- elseif self.direction == directions.down and moving then
-	-- 	self.animation = self.animations.walkDown
-	-- elseif self.direction == directions.left and moving then
-	-- 	self.animation = self.animations.walkLeft
-	-- elseif self.direction == directions.right and moving then
-	-- 	self.animation = self.animations.walkRight
-	-- end
-
-	-- if moving then
-	-- 	self.animation:resume()
-	-- else
-	-- 	self.animation:pause()
-	-- end
 end
 
 function Player:draw()
@@ -94,23 +78,42 @@ end
 
 function Player:getAnimations()
 	local animations = {}
+	local paths = {
+		walkUp = "res/player/walk/up.png"
+	}
 
-	-- Cut that spritesheet up into a grid
-	-- local grid = anim8.newGrid(
-	-- 	celWidth, -- Cel width
-	-- 	celHeight, -- Cel height
-	-- 	self.spritesheet:getWidth(), -- Spritesheet width
-	-- 	self.spritesheet:getHeight() -- Spritesheet height
-	-- )
+	-- Create new animations for each spritesheet found
+	for key, path in pairs(paths) do
+		if love.filesystem.getInfo(path) then
+			local spritesheet = love.graphics.newImage(path)
+			local grid = anim8.newGrid(
+				self.cel.width,
+				self.cel.height,
+				spritesheet:getWidth(),
+				spritesheet:getHeight()
+			)
+			-- NOTE: The cel width must fit into the spritesheet exactly
+			local range = '1-' .. (spritesheet:getWidth() / self.cel.width)
+			local duration = 0.1
+			local animation = anim8.newAnimation(
+				grid:getFrames(
+					range,
+					1 -- Row
+				),
+				duration
+			)
 
-	-- Walking
-	-- animations.walkDown = anim8.newAnimation(
-	-- 	grid(
-	-- 		'1-8', -- Cels used
-	-- 		1 -- Row
-	-- 	),
-	-- 	0.1 -- Duration per cel
-	-- )
+			-- Store the animation info in the table under the specified key
+			animations[key] = {
+				spritesheet = spritesheet,
+				motion = animation
+			}
+
+			print(animations[key])
+		else
+			print("WARNING!", path, "does not exist!")
+		end
+	end
 
 	return animations
 end

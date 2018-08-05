@@ -90,6 +90,10 @@ function Player:update(deltaTime)
 	end
 end
 
+function Player:draw()
+	self.super.draw(self)
+end
+
 function Player:getAnimations()
 	-- Cut that spritesheet up into a grid
 	local grid = anim8.newGrid(

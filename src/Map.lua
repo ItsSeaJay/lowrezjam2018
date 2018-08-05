@@ -14,7 +14,7 @@ end
 
 function Map:update(dt)
     self.stimap:update(dt)
-    
+
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:update(dt)
 		self:collide(gameObject)
@@ -35,9 +35,10 @@ end
 
 function Map:safeGetTile(x, y)
 	-- For some reason need to add 1. STI is kinda bugged in a few places like this
-	if self.mainLayer.data[y+1] then
-		return self.mainLayer.data[y+1][x+1]
+	if self.mainLayer.data[y + 1] then
+		return self.mainLayer.data[y + 1][x + 1]
 	end
+	
 	return nil
 end
 

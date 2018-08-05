@@ -15,7 +15,7 @@ function love.load()
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
 	maps = {}
-	maps["testmap"] = Map("res/testmap.lua")
+	maps["testmap"] = Map("res/testMap.lua")
 	currentMap = {}
 	setMap("testmap")
 

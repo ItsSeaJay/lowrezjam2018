@@ -10,56 +10,18 @@ local Player = GameObject:extend()
 function Player:new()
 	-- Get a reference to the spritesheet image for the player
 	self.spritesheet = maid64.newImage("res/player.png")
-
-	local celWidth = 16
-	local celHeight = celWidth
-	-- Cut that spritesheet up into a grid
-	local grid = anim8.newGrid(
-		celWidth, -- Cel width
-		celHeight, -- Cel height
-		self.spritesheet:getWidth(), -- Spritesheet width
-		self.spritesheet:getHeight() -- Spritesheet height
-	)
+	
 	-- Create a table for all of the animations that the player will use
 	-- TODO: Make a function for this using loops
-	self.animations = {}
-	-- Walking
-	self.animations.walkDown = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			1 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	self.animations.walkUp = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			4 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	self.animations.walkLeft = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			3 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	self.animations.walkRight = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			2 -- Row
-		),
-		0.1 -- Duration per cel
-	)
+	self.animations = self:getAnimations()
 
 	-- Set a default animation
 	self.animation = self.animations.walkDown
 	self.direction = directions.down
 	self.x = 0
 	self.y = 0
-	self.halfWidth = celWidth / 2
-	self.halfHeight = celWidth / 2
+	self.halfWidth = 8
+	self.halfHeight = 8
 	self.speed = 32
 	self.worldRight = 512
 	self.worldBottom = 512
@@ -113,6 +75,51 @@ function Player:update(deltaTime)
 	else
 		self.animation:pause()
 	end
+end
+
+function Player:getAnimations()
+	local celWidth = 16
+	local celHeight = celWidth
+	-- Cut that spritesheet up into a grid
+	local grid = anim8.newGrid(
+		celWidth, -- Cel width
+		celHeight, -- Cel height
+		self.spritesheet:getWidth(), -- Spritesheet width
+		self.spritesheet:getHeight() -- Spritesheet height
+	)
+	local animations = {}
+
+	-- Walking
+	animations.walkDown = anim8.newAnimation(
+		grid(
+			'1-8', -- Cels used
+			1 -- Row
+		),
+		0.1 -- Duration per cel
+	)
+	animations.walkUp = anim8.newAnimation(
+		grid(
+			'1-8', -- Cels used
+			4 -- Row
+		),
+		0.1 -- Duration per cel
+	)
+	animations.walkLeft = anim8.newAnimation(
+		grid(
+			'1-8', -- Cels used
+			3 -- Row
+		),
+		0.1 -- Duration per cel
+	)
+	animations.walkRight = anim8.newAnimation(
+		grid(
+			'1-8', -- Cels used
+			2 -- Row
+		),
+		0.1 -- Duration per cel
+	)
+
+	return animations
 end
 
 function Player:setWorld(right, bottom)

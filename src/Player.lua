@@ -8,14 +8,17 @@ local GameObject = require "src.GameObject"
 local Rectangle = require "src.Rectangle"
 local Player = GameObject:extend()
 
+-- NOTE: This needs to be consistant across all animations
 local celWidth = 16
 local celHeight = celWidth
 
 function Player:new()	
 	-- Create a table for all of the animations that the player will use
-	-- TODO: Make a function for this using loops
 	self.cel = Rectangle(celWidth, celHeight)
-	self.animations = self:getAnimations()
+	self.animations = self:getAnimations({
+		walkUp = "res/player/walk/up.png",
+		walkDown = "res/player/walk/down.png"
+	})
 
 	-- Set a default animation
 	self.animation = self.animations.walkUp
@@ -76,11 +79,8 @@ function Player:draw()
 	self.super.draw(self)
 end
 
-function Player:getAnimations()
+function Player:getAnimations(paths)
 	local animations = {}
-	local paths = {
-		walkUp = "res/player/walk/up.png"
-	}
 
 	-- Create new animations for each spritesheet found
 	for key, path in pairs(paths) do

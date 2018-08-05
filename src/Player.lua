@@ -15,16 +15,30 @@ local celHeight = celWidth
 function Player:new()	
 	-- Create a table for all of the animations that the player will use
 	self.cel = Rectangle(celWidth, celHeight)
-	self.animations = self:getAnimations({
+	self.animations = anim8.getAnimations({
 		-- Idling
 		idleUp = {
+			path = "res/player/idle/up.png",
+			duration = 2
+		},
+		idleDown = {
 			path = "res/player/idle/down.png",
-			duration = 1
+			duration = 2
+		},
+		idleLeft = {
+			path = "res/player/idle/up.png",
+			duration = 2
+		},
+		idleRight = {
+			path = "res/player/idle/down.png",
+			duration = 2
 		}
-	})
+	},
+	celWidth,
+	celHeight)
 
 	-- Set a default animation
-	self.animation = self.animations.idleUp
+	self.animation = self.animations.idleDown
 	self.direction = directions.down
 	self.x = 0
 	self.y = 0
@@ -85,8 +99,8 @@ function Player:getAnimations(data)
 
 	-- Create new animations for each spritesheet found
 	for key, animation in pairs(data) do
-		if love.filesystem.getInfo(animation.path or "") then
-			local spritesheet = maid64.newImage(animation.path or "res/alien.png")
+		if love.filesystem.getInfo(animation.path) then
+			local spritesheet = maid64.newImage(animation.path)
 			local grid = anim8.newGrid(
 				self.cel.width,
 				self.cel.height,
@@ -95,7 +109,6 @@ function Player:getAnimations(data)
 			)
 			-- NOTE: The cel width must fit into the spritesheet exactly
 			local range = '1-' .. (spritesheet:getWidth() / self.cel.width)
-			local duration = animations
 			local animation = anim8.newAnimation(
 				grid:getFrames(
 					range,
@@ -111,10 +124,8 @@ function Player:getAnimations(data)
 			-- Store the animation info in the table under the specified key
 			animations[key] = {
 				spritesheet = spritesheet,
-				motion = animation
+				motion = animation -- I couldn't think of a better name! (Sea Jay)
 			}
-
-			print(animations[key])
 		else
 			print("WARNING!", path, "does not exist!")
 		end

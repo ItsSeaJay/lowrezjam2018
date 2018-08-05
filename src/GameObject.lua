@@ -5,6 +5,7 @@ local GameObject = class:extend()
 
 function GameObject:new()
 	self.destroyed = false
+	self.depth = 0
 end
 
 function GameObject:update(deltaTime)

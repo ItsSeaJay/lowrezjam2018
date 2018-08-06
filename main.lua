@@ -1,7 +1,11 @@
-local maid64 = require "lib.maid64"
 local anim8 = require "lib.anim8"
+local maid64 = require "lib.maid64"
+local lume = require "lib.lume"
 
 local Map = require "src.Map"
+local Light = require "src.LightingSystem"
+local LightingSystem = require "src.LightingSystem"
+
 local maps = require "src.maps"
 local camera = require "src.camera"
 
@@ -13,19 +17,17 @@ function setMap(name)
 end
 
 function love.load()
-	maid64.setup(64) -- Scale the screen to 64 pixels squared
-
 	-- Set the default scaling filter to nearest-neighbour
 	love.graphics.setDefaultFilter("nearest", "nearest")
+
+	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
 	-- Configure the starting map
 	currentMap = {}
 	setMap("untitled")
 
-	-- Create canvases for the main game and lighting
-	canvases = {}
-	canvases.main = love.graphics.newCanvas(64, 64)
-	canvases.lighting = love.graphics.newCanvas(64, 64)
+	-- Configure the game's lighting system
+	lighting = LightingSystem()
 end
 
 function love.update(deltaTime)
@@ -34,8 +36,9 @@ function love.update(deltaTime)
 	end
 
 	currentMap:update(deltaTime)
+	lighting:update(deltaTime)
 
-	-- Follow player always
+	-- Follow the player always
 	-- NOTE: We're probably going to want some kind of dynamic camera soon,
 	--       but this will do for now
 	camera:setPosition(currentMap:getPlayer().x, currentMap:getPlayer().y)
@@ -47,7 +50,19 @@ function love.draw(deltaTime)
     -- (Taken from the love2d wiki: https://love2d.org/wiki/Canvas)
 	love.graphics.setColor(1, 1, 1, 1)
 
-	love.graphics.draw(canvases.main)
+	-- NOTE: Everything between maid.start() and maid.finish() is downscaled 
+	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared 
+	maid64.start()
+		-- Everything inside this function is drawn relative to the camera
+		camera:draw(function (left, top, width, height)
+			-- STI needs offsets passed to it directly
+			currentMap:draw(-left, -top) 
+		end)
+
+		-- Anything that needs to be scaled, but sit on top of the camera's view
+		-- should go down here
+		love.graphics.draw(shadowMask)		
+	maid64.finish()
 end
 
 function love.keypressed(key, scancode, isRepeat)

@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"idle",
+				"idleRight"
+			],
+			[
+				"shad",
+				"shadowColour"
+			],
+			[
+				"sha",
+				"shadowColour"
+			],
+			[
+				"lume",
+				"lume.color"
+			],
+			[
+				"light",
+				"lightColour"
+			],
+			[
+				"Light",
+				"LightingSystem"
+			],
+			[
+				"canv",
+				"canvas"
+			],
+			[
+				"canva",
+				"canvases.main"
+			],
+			[
+				"debug",
+				"debugInfo"
+			],
+			[
+				"play",
+				"playerObj"
+			],
+			[
+				"game",
+				"gameObject"
+			],
+			[
 				"ce",
 				"celWidth"
 			],
@@ -14,10 +58,6 @@
 			[
 				"animat",
 				"animations"
-			],
-			[
-				"idle",
-				"idleDown"
 			],
 			[
 				"anim",
@@ -54,10 +94,6 @@
 			[
 				"wal",
 				"walkBackwards"
-			],
-			[
-				"game",
-				"gameObjects"
 			],
 			[
 				"for",
@@ -478,42 +514,6 @@
 			[
 				"cl",
 				"class"
-			],
-			[
-				"fle",
-				"flex"
-			],
-			[
-				"flex",
-				"flex-shrink\tproperty"
-			],
-			[
-				"instance",
-				"instance_create()"
-			],
-			[
-				"rotate",
-				"rotate(...)"
-			],
-			[
-				"recom",
-				"recomendations"
-			],
-			[
-				"margin",
-				"margin-bottom\tproperty"
-			],
-			[
-				"u-c",
-				"u-center-vertical"
-			],
-			[
-				"bord",
-				"border-box\tbox-sizing"
-			],
-			[
-				"white",
-				"white-space\tproperty"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "main.lua",
 			"settings":
 			{
-				"buffer_size": 1805,
+				"buffer_size": 2460,
 				"encoding": "UTF-8",
 				"line_ending": "Windows",
 				"name": "function love.load()"
@@ -533,17 +533,17 @@
 			"file": "src/Player.lua",
 			"settings":
 			{
-				"buffer_size": 2861,
+				"buffer_size": 3483,
 				"encoding": "UTF-8",
-				"line_ending": "Windows",
-				"name": "class = require \"classic\""
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/GameObject.lua",
+			"file": "src/Light.lua",
 			"settings":
 			{
-				"buffer_size": 718,
+				"buffer_size": 255,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -813,15 +813,29 @@
 	"expanded_folders":
 	[
 		"/D/MEGA/PROJECTS/lowrezjam2018",
-		"/D/MEGA/PROJECTS/lowrezjam2018/lib",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src"
+		"/D/MEGA/PROJECTS/lowrezjam2018/res",
+		"/D/MEGA/PROJECTS/lowrezjam2018/res/placeholders",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps"
 	],
 	"file_history":
 	[
-		"/D/MEGA/PROJECTS/lowrezjam2018/lib/lume.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/lib/anim8.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/GameObject.lua",
+		"/D/itch.io/apps/Legend of Xenia/test.csv",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/LightingSystem.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Map.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib/anim8.lua",
+		"/C/Users/user/Downloads/Program Downloads/flashlight-POC/main.lua",
+		"/C/Users/user/Downloads/Program Downloads/Light Test/main.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Light.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib/maid64.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Player.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps/untitled.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/res/tiles/topDownTestTiles.tsx",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps/init.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/GameObject.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/res/names.txt",
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib/lume.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Rectangle.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/helper.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/cardinalDirections.lua",
@@ -829,7 +843,6 @@
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Game.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/conf.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/IOU.md",
-		"/D/MEGA/PROJECTS/lowrezjam2018/lib/maid64.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/debug.bat",
 		"/D/MEGA/PROJECTS/lowrezjam2018/.editorconfig",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/entities/Player.lua",
@@ -934,22 +947,11 @@
 		"/D/MEGA/PROJECTS/lateral-brute/res/alphabet.txt",
 		"/D/MEGA/PROJECTS/lateral-brute/res/upside_down_letters.txt",
 		"/D/MEGA/PROJECTS/lateral-brute/__init__.py",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/Lua/Snippets/function-(fun).sublime-snippet",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/Lua/Snippets/function-(function).sublime-snippet",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/JavaScript/Symbol List Function.tmPreferences",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/JavaScript/JSON.sublime-syntax",
-		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/JavaScript/Indexed Symbols.tmPreferences",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/picoracer2048.p8",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Hug Arena.p8",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Celeste Classic.p8",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/PICORACER-2048.p8",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Dusk Child v1.4.p8"
+		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -964,6 +966,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"walkUp",
+			"idle",
+			"location",
+			"32",
+			"LightingSystem",
+			"mouse",
+			"\"multiply\"",
+			"getanim",
+			"physical",
+			"direc",
+			"stimap",
+			"create",
+			"x",
+			"mapLocation",
+			"vertical",
 			"2",
 			"clamp",
 			"self.cel.width",
@@ -996,6 +1013,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"\"multiply\", \"premultiplied\"",
 			"celWidth",
 			"setMap",
 			"walkDown",
@@ -1020,15 +1038,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1805,
+						"buffer_size": 2460,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1288,
-								1288
+								965,
+								965
 							]
 						],
 						"settings":
@@ -1052,27 +1070,26 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2861,
+						"buffer_size": 3483,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2043,
-								2043
+								554,
+								554
 							]
 						],
 						"settings":
 						{
-							"auto_name": "class = require \"classic\"",
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
 							"syntax": "Packages/Lua/Lua.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 810.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1080,19 +1097,19 @@
 				},
 				{
 					"buffer": 2,
-					"file": "src/GameObject.lua",
+					"file": "src/Light.lua",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 718,
+						"buffer_size": 255,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								128,
+								128
 							]
 						],
 						"settings":
@@ -1155,7 +1172,7 @@
 	"project": "lowrezjam2018.sublime-project",
 	"replace":
 	{
-		"height": 73.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1165,20 +1182,40 @@
 		"selected_items":
 		[
 			[
-				"game",
-				"src\\GameObject.lua"
+				"an",
+				"lib\\anim8.lua"
+			],
+			[
+				"pla",
+				"src\\Player.lua"
+			],
+			[
+				"ligh",
+				"src\\Light.lua"
+			],
+			[
+				"map",
+				"src\\Map.lua"
+			],
+			[
+				"mai",
+				"lib\\maid64.lua"
 			],
 			[
 				"anim",
 				"lib\\anim8.lua"
 			],
 			[
-				"gamer",
-				"lib\\gamera.lua"
+				"pl",
+				"src\\Player.lua"
 			],
 			[
-				"pla",
-				"src\\entities\\Player.lua"
+				"game",
+				"src\\GameObject.lua"
+			],
+			[
+				"gamer",
+				"lib\\gamera.lua"
 			],
 			[
 				"gam",
@@ -1199,10 +1236,6 @@
 			[
 				"up",
 				"src\\systems\\Update.lua"
-			],
-			[
-				"pl",
-				"src\\entities\\Player.lua"
 			],
 			[
 				"contro",
@@ -1283,10 +1316,6 @@
 			[
 				"gameobj",
 				"include\\GameObject.h"
-			],
-			[
-				"mai",
-				"src\\Main.cpp"
 			],
 			[
 				"g",

@@ -2,6 +2,7 @@ local maid64 = require "lib.maid64"
 local anim8 = require "lib.anim8"
 
 local Map = require "src.Map"
+local maps = require "src.maps"
 local camera = require "src.camera"
 
 function setMap(name)
@@ -15,8 +16,6 @@ function love.load()
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
 	-- Create some global variables for all of the maps in the game
-	maps = {}
-	maps["testmap"] = Map("src/maps/testMap.lua")
 	currentMap = {}
 	setMap("testmap")
 end

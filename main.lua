@@ -21,6 +21,11 @@ function love.load()
 	-- Configure the starting map
 	currentMap = {}
 	setMap("untitled")
+
+	-- Create canvases for the main game and lighting
+	canvases = {}
+	canvases.main = love.graphics.newCanvas(64, 64)
+	canvases.lighting = love.graphics.newCanvas(64, 64)
 end
 
 function love.update(deltaTime)
@@ -42,15 +47,7 @@ function love.draw(deltaTime)
     -- (Taken from the love2d wiki: https://love2d.org/wiki/Canvas)
 	love.graphics.setColor(1, 1, 1, 1)
 
-	-- NOTE: Everything between maid.start() and maid.finish() is downscaled
-	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared
-	maid64.start()
-		camera:draw(function (left, top, width, height)
-			-- Default to a black background
-			love.graphics.clear(0, 0, 0)
-			currentMap:draw(-left, -top) -- STI needs offsets passed to it directly
-		end)
-	maid64.finish()
+	love.graphics.draw(canvases.main)
 end
 
 function love.keypressed(key, scancode, isRepeat)

@@ -52,22 +52,25 @@ function Player:new(x, y)
 	celWidth,
 	celHeight)
 
+	self.direction = "down"
+
 	self.states = {}
 	self.states.normal = function (deltaTime)
 		local up = love.keyboard.isDown("w") or love.keyboard.isDown("up")
 		local down = love.keyboard.isDown("s") or love.keyboard.isDown("down")
 		local left = love.keyboard.isDown("a") or love.keyboard.isDown("left")
 		local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
-		local horizontal = 0
-		local vertical = 0
+		local horizontal, vertical
 		local moving = up or down or left or right
 
 		-- Movement
 		-- Horizontal
 		if left then
 			horizontal = -1
+			self.direction = "left"
 		elseif right then
 			horizontal = 1
+			self.direction = "right"
 		else
 			horizontal = 0
 		end
@@ -75,14 +78,35 @@ function Player:new(x, y)
 		-- Vertical
 		if up then
 			vertical = -1
+			self.direction = "up"
 		elseif down then
 			vertical = 1
+			self.direction = "down"
 		else
 			vertical = 0
 		end
 
-		if not moving then
-			self.animation = self.animations.idleDown
+		-- Handle the 
+		if moving then
+			if self.direction == "up" then
+				self.animation = self.animations.walkUp
+			elseif self.direction == "down" then
+				self.animation = self.animations.walkDown
+			elseif self.direction == "left" then
+				self.animation = self.animations.walkLeft
+			elseif self.direction == "right" then
+				self.animation = self.animations.walkRight
+			end
+		else
+			if self.direction == "up" then
+				self.animation = self.animations.idleUp
+			elseif self.direction == "down" then
+				self.animation = self.animations.idleDown
+			elseif self.direction == "left" then
+				self.animation = self.animations.idleLeft
+			elseif self.direction == "right" then
+				self.animation = self.animations.idleLeft
+			end
 		end
 
 		-- Move within the boundaries of the current world

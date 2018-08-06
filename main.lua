@@ -27,9 +27,13 @@ function love.load()
 	setMap("untitled")
 
 	-- Configure the game's lighting system
-	lighting = LightingSystem({
-		Light(32, 32)
-	}, "#222034")
+	lighting = LightingSystem(
+		{ -- Lights list
+			Light(32, 32)
+		},
+		"#222034", -- Darkness colour
+		0.80 -- Alpha
+	)
 end
 
 function love.update(deltaTime)
@@ -50,7 +54,7 @@ function love.draw(deltaTime)
 	-- very important!: reset color before drawing to canvas to have colors properly displayed
     -- see discussion here: https://love2d.org/forums/viewtopic.php?f=4&p=211418#p211418
     -- (Taken from the love2d wiki: https://love2d.org/wiki/Canvas)
-	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.setColor(lume.color("#FFFFFF"))
 
 	-- NOTE: Everything between maid.start() and maid.finish() is downscaled 
 	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared 

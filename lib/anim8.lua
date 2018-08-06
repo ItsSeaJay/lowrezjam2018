@@ -131,7 +131,7 @@ local function getAnimations(data, celWidth, celHeight)
 				motion = animation -- I couldn't think of a better name! (Sea Jay)
 			}
 		else
-			print(debugInfo.source, "WARNING!", path, "does not exist!")
+			print(debugInfo.source, "WARNING!", animation.path, "does not exist!")
 		end
 	end
 

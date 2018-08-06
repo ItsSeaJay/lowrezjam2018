@@ -96,6 +96,7 @@ end
 
 local function getAnimations(data, celWidth, celHeight)
 	local animations = {}
+	local debugInfo = debug.getinfo(1, 'S')
 
 	-- Create new animations for each spritesheet found
 	for key, animation in pairs(data) do
@@ -127,7 +128,7 @@ local function getAnimations(data, celWidth, celHeight)
 				motion = animation -- I couldn't think of a better name! (Sea Jay)
 			}
 		else
-			print("WARNING!", path, "does not exist!")
+			print(debugInfo.source, "WARNING!", path, "does not exist!")
 		end
 	end
 

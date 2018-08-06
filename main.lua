@@ -15,15 +15,16 @@ end
 function love.load()
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
-	-- Create some global variables for all of the maps in the game
+	-- Configure the starting map
 	currentMap = {}
-	setMap("testmap")
+	setMap("untitled")
 end
 
 function love.update(deltaTime)
 	if currentMap.nextMap then
 		setMap(currentMap.nextMap)
 	end
+
 	currentMap:update(deltaTime)
 
 	-- Follow player always

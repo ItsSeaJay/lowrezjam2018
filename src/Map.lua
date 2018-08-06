@@ -9,7 +9,7 @@ function Map:new(location)
 	self.stimap = sti(location)
 	self.mainLayer = self.stimap.layers[1]
 	self.gameObjects = {}
-	self.playerObj = Player()
+	self.playerObj = Player(32, 32)
 	table.insert(self.gameObjects, self.playerObj)
 end
 
@@ -94,7 +94,7 @@ function Map:collide(go)
 		-- Down
 		x, y = self.stimap:convertPixelToTile(go.x + i, go.y + go.boundingBox.height / 2)
 		tile = self:safeGetTile(x, y)
-		
+
 		if tile and tile.properties.solid then
 			go.y = (y) * self.stimap.tileheight - go.boundingBox.height / 2
 		end

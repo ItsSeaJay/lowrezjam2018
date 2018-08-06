@@ -15,6 +15,9 @@ end
 function love.load()
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
+	-- Set the default scaling filter to nearest-neighbour
+	love.graphics.setDefaultFilter("nearest", "nearest")
+
 	-- Configure the starting map
 	currentMap = {}
 	setMap("untitled")
@@ -34,11 +37,14 @@ function love.update(deltaTime)
 end
 
 function love.draw(deltaTime)
+	-- very important!: reset color before drawing to canvas to have colors properly displayed
+    -- see discussion here: https://love2d.org/forums/viewtopic.php?f=4&p=211418#p211418
+    -- (Taken from the love2d wiki: https://love2d.org/wiki/Canvas)
+	love.graphics.setColor(1, 1, 1, 1)
+
 	-- NOTE: Everything between maid.start() and maid.finish() is downscaled
 	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared
 	maid64.start()
-		-- NOTE: User interfaces can be drawn here with absolute positions
-
 		camera:draw(function (left, top, width, height)
 			-- Default to a black background
 			love.graphics.clear(0, 0, 0)

@@ -11,7 +11,7 @@ local Player = GameObject:extend()
 local celWidth = 16
 local celHeight = celWidth
 
-function Player:new()
+function Player:new(x, y)
 	self.cel = Rectangle(celWidth, celHeight)
 	self.animations = anim8.getAnimations({
 		-- Idling
@@ -102,8 +102,8 @@ function Player:new()
 
 	self.state = self.states.normal
 	self.animation = self.animations.idleDown
-	self.x = 0
-	self.y = 0
+	self.x = x or 0
+	self.y = y or 0
 	self.boundingBox = Rectangle(6, 12)
 	self.speed = 32
 	self.worldRight = 512

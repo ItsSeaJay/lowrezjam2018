@@ -27,12 +27,12 @@ local anim8 = {
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   ]]
 }
--- Used for getting multiple animations from meta data
-local maid64 = require "lib.maid64"
 
 local Grid = {}
 
 local _frames = {}
+
+local maid64 = require "lib.maid64"
 
 local function assertPositiveInteger(value, name)
   if type(value) ~= 'number' then error(("%s should be a number, was %q"):format(name, tostring(value))) end
@@ -101,6 +101,9 @@ local function getAnimations(data, celWidth, celHeight)
 	-- Create new animations for each spritesheet found
 	for key, animation in pairs(data) do
 		if love.filesystem.getInfo(animation.path) then
+			-- Using Maid64 for loading images is a hack to compensate for the lower
+			-- resolution used by the game
+			-- Ideally, you wouldn't want the dependancy
 			local spritesheet = maid64.newImage(animation.path)
 			local grid = anim8.newGrid(
 				celWidth,

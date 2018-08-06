@@ -2,7 +2,6 @@ local class = require "lib.classic"
 local maid64 = require "lib.maid64"
 local anim8 = require "lib.anim8"
 local lume = require "lib.lume"
-local directions = require "src.cardinalDirections"
 
 local GameObject = require "src.GameObject"
 local Rectangle = require "src.Rectangle"
@@ -59,32 +58,36 @@ function Player:new()
 		local down = love.keyboard.isDown("s") or love.keyboard.isDown("down")
 		local left = love.keyboard.isDown("a") or love.keyboard.isDown("left")
 		local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
+		local horizontal = 0
+		local vertical = 0
 		local moving = up or down or left or right
 
 		-- Movement
 		-- Horizontal
-		if up then
-			self.y = self.y - self.speed * deltaTime
-			self.animation = self.animations.walkUp
-		elseif down then
-			self.y = self.y + self.speed * deltaTime
-			self.animation = self.animations.walkDown
+		if left then
+			horizontal = -1
+		elseif right then
+			horizontal = 1
+		else
+			horizontal = 0
 		end
 
 		-- Vertical
-		if left then
-			self.x = self.x - self.speed * deltaTime
-			self.animation = self.animations.walkLeft
-		elseif right then
-			self.x = self.x + self.speed * deltaTime
-			self.animation = self.animations.walkRight
+		if up then
+			vertical = -1
+		elseif down then
+			vertical = 1
+		else
+			vertical = 0
 		end
 
 		if not moving then
 			self.animation = self.animations.idleDown
 		end
 
-		-- Clamp the player's position within the current world
+		-- Move within the boundaries of the current world
+		self.x = self.x + self.speed * horizontal * deltaTime
+		self.y = self.y + self.speed * vertical * deltaTime
 		self.x = lume.clamp(
 			self.x,
 			(self.boundingBox.width / 2),

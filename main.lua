@@ -14,14 +14,11 @@ end
 function love.load()
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
+	-- Create some global variables for all of the maps in the game
 	maps = {}
-	maps["testmap"] = Map("res/testMap.lua")
+	maps["testmap"] = Map("src/maps/testMap.lua")
 	currentMap = {}
 	setMap("testmap")
-
-	-- Using maid64 instead of love ensures that
-	-- nearest neighbor scaling is used
-	background = maid64.newImage("res/background.jpg")
 end
 
 function love.update(deltaTime)

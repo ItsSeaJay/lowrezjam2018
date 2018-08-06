@@ -28,8 +28,8 @@ function love.load()
 
 	-- Configure the game's lighting system
 	lighting = LightingSystem({
-		Light()
-	})
+		Light(32, 32)
+	}, "#222034")
 end
 
 function love.update(deltaTime)

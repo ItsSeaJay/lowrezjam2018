@@ -5,8 +5,8 @@ local Player = require "src.Player"
 
 local Map = class:extend()
 
-function Map:new(location)
-	self.stimap = sti(location)
+function Map:new(path)
+	self.stimap = sti(path)
 	self.mainLayer = self.stimap.layers[1]
 	self.gameObjects = {}
 	self.playerObj = Player(32, 32)

@@ -5,21 +5,23 @@ local class = require "lib.classic"
 local Light = require "src.Light"
 local LightingSystem = class:extend()
 
-function LightingSystem:new(lights, lightColour, shadowColour)
+function LightingSystem:new(lights, shadowColour)
 	self.lights = lights or {}
+	-- Set the colour of no light using lume
+	self.shadowColour = shadowColour or "#00000000"
 	self.canvas = love.graphics.newCanvas()
 
 	love.graphics.setCanvas(self.mask)
-		love.graphics.clear(0, 0, 0)
+		love.graphics.clear(lume.color(self.shadowColour))
 	love.graphics.setCanvas()
 end
 
 function LightingSystem:update(deltaTime)
 	love.graphics.setCanvas(self.canvas)
-		love.graphics.clear(0, 0, 0) -- White
+		love.graphics.clear(lume.color(self.shadowColour, 0.75))
 		love.graphics.setBlendMode("multiply", "premultiplied")
 		
-		for key, light in ipairs(self.lights) do
+		for key, light in pairs(self.lights) do
 			love.graphics.draw(
 				light.mask,
 				light.x,
@@ -27,8 +29,8 @@ function LightingSystem:update(deltaTime)
 				0,
 				1,
 				1,
-				64 / 2,
-				64 / 2
+				light.mask:getWidth() / 2,
+				light.mask:getHeight() / 2
 			)
 		end
 
@@ -37,9 +39,7 @@ function LightingSystem:update(deltaTime)
 end
 
 function LightingSystem:draw()
-	love.graphics.setColor(255, 255, 255, 200)
 	love.graphics.draw(self.canvas)
-	love.graphics.setColor(255, 255, 255)
 end
 
 return LightingSystem

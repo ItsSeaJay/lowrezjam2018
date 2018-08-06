@@ -44,6 +44,7 @@ function LightingSystem:update(deltaTime)
 end
 
 function LightingSystem:draw()
+	love.graphics.setColor(lume.color("#FFFFFF"))
 	love.graphics.draw(self.canvas)
 end
 

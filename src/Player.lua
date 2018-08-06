@@ -16,36 +16,36 @@ function Player:new(x, y)
 	self.animations = anim8.getAnimations({
 		-- Idling
 		idleUp = {
-			path = "res/player/idle/up.png",
+			path = "res/animations/player/idle/up.png",
 			duration = 2
 		},
 		idleDown = {
-			path = "res/player/idle/down.png",
+			path = "res/animations/player/idle/down.png",
 			duration = 2
 		},
 		idleLeft = {
-			path = "res/player/idle/left.png",
+			path = "res/animations/player/idle/left.png",
 			duration = 2
 		},
 		idleRight = {
-			path = "res/player/idle/right.png",
+			path = "res/animations/player/idle/right.png",
 			duration = 2
 		},
 		-- Walking
 		walkUp = {
-			path = "res/player/walk/up.png",
+			path = "res/animations/player/walk/up.png",
 			duration = 0.1
 		},
 		walkDown = {
-			path = "res/player/walk/down.png",
+			path = "res/animations/player/walk/down.png",
 			duration = 0.1
 		},
 		walkLeft = {
-			path = "res/player/walk/left.png",
+			path = "res/animations/player/walk/left.png",
 			duration = 0.1
 		},
 		walkRight = {
-			path = "res/player/walk/right.png",
+			path = "res/animations/player/walk/right.png",
 			duration = 0.1
 		}
 	},
@@ -86,7 +86,7 @@ function Player:new(x, y)
 			vertical = 0
 		end
 
-		-- Handle the 
+		-- Handle the animations for this state
 		if moving then
 			if self.direction == "up" then
 				self.animation = self.animations.walkUp
@@ -105,7 +105,7 @@ function Player:new(x, y)
 			elseif self.direction == "left" then
 				self.animation = self.animations.idleLeft
 			elseif self.direction == "right" then
-				self.animation = self.animations.idleLeft
+				self.animation = self.animations.idleRight
 			end
 		end
 

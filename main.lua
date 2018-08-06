@@ -34,6 +34,12 @@ function love.load()
 		"#222034", -- Darkness colour
 		0.80 -- Alpha
 	)
+
+	-- Create a list of global fonts to use later
+	fonts = {}
+	fonts.tiny = love.graphics.newFont("res/fonts/tiny/tiny.ttf", 6)
+	fonts.m3x6 = love.graphics.newFont("res/fonts/m3x6/m3x6.ttf", 16)
+	fonts.m3x6 = love.graphics.newImageFont("res/fonts/m3x6/m3x6.ttf", 16)
 end
 
 function love.update(deltaTime)
@@ -67,7 +73,9 @@ function love.draw(deltaTime)
 		end)
 
 		-- Anything that needs to be scaled, but sit on top of the camera's view
-		-- should go down here		
+		-- should go down here
+		love.graphics.setFont(fonts.m3x6)
+		love.graphics.print("Hello, World!", 2, 2)
 	maid64.finish()
 end
 

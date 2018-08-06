@@ -3,7 +3,7 @@ local maid64 = require "lib.maid64"
 local lume = require "lib.lume"
 
 local Map = require "src.Map"
-local Light = require "src.LightingSystem"
+local Light = require "src.Light"
 local LightingSystem = require "src.LightingSystem"
 
 local maps = require "src.maps"
@@ -27,7 +27,9 @@ function love.load()
 	setMap("untitled")
 
 	-- Configure the game's lighting system
-	lighting = LightingSystem()
+	lighting = LightingSystem({
+		Light()
+	})
 end
 
 function love.update(deltaTime)
@@ -56,12 +58,12 @@ function love.draw(deltaTime)
 		-- Everything inside this function is drawn relative to the camera
 		camera:draw(function (left, top, width, height)
 			-- STI needs offsets passed to it directly
-			currentMap:draw(-left, -top) 
+			currentMap:draw(-left, -top)
+			lighting:draw()
 		end)
 
 		-- Anything that needs to be scaled, but sit on top of the camera's view
-		-- should go down here
-		love.graphics.draw(shadowMask)		
+		-- should go down here		
 	maid64.finish()
 end
 

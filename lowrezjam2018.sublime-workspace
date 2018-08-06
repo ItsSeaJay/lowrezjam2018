@@ -4,6 +4,86 @@
 		"selected_items":
 		[
 			[
+				"ce",
+				"celWidth"
+			],
+			[
+				"cel",
+				"celHeight"
+			],
+			[
+				"animat",
+				"animations"
+			],
+			[
+				"idle",
+				"idleDown"
+			],
+			[
+				"anim",
+				"animation"
+			],
+			[
+				"walk",
+				"walkDown"
+			],
+			[
+				"sprit",
+				"spritesheet:getWidth"
+			],
+			[
+				"new",
+				"newImage"
+			],
+			[
+				"sef",
+				"self.y"
+			],
+			[
+				"an",
+				"animation"
+			],
+			[
+				"get",
+				"getAnimations"
+			],
+			[
+				"anima",
+				"animations"
+			],
+			[
+				"wal",
+				"walkBackwards"
+			],
+			[
+				"game",
+				"gameObjects"
+			],
+			[
+				"for",
+				"forp\tfor k,v in pairs()"
+			],
+			[
+				"fun",
+				"function\tfunction"
+			],
+			[
+				"ga",
+				"gamera"
+			],
+			[
+				"back",
+				"backgroundHeight"
+			],
+			[
+				"ba",
+				"backgroundWidth"
+			],
+			[
+				"love",
+				"love.graphics.getWidth"
+			],
+			[
 				"Cam",
 				"CameraEntity"
 			],
@@ -88,10 +168,6 @@
 				"concord"
 			],
 			[
-				"fun",
-				"fun\tfunction"
-			],
-			[
 				"del",
 				"deltaTime"
 			],
@@ -104,16 +180,8 @@
 				"intersects"
 			],
 			[
-				"get",
-				"getBoundingBox"
-			],
-			[
 				"Game",
 				"GameObject"
-			],
-			[
-				"for",
-				"for"
 			],
 			[
 				"G",
@@ -166,10 +234,6 @@
 			[
 				"sma",
 				"smashedImage"
-			],
-			[
-				"back",
-				"background"
 			],
 			[
 				"Te",
@@ -450,75 +514,39 @@
 			[
 				"white",
 				"white-space\tproperty"
-			],
-			[
-				"pass",
-				"password_hash"
-			],
-			[
-				"pas",
-				"password_hash"
-			],
-			[
-				"_",
-				"_POST"
-			],
-			[
-				"get_",
-				"get_dom_elements"
-			],
-			[
-				"csrf",
-				"csrf_token"
-			],
-			[
-				"passwor",
-				"password_hash"
-			],
-			[
-				"index",
-				"index_page"
-			],
-			[
-				"inde",
-				"index_page"
-			],
-			[
-				"parser",
-				"parser_data"
-			],
-			[
-				"Pass",
-				"Password_Hasher_PHP"
-			],
-			[
-				"inline",
-				"inline-block\tdisplay"
-			],
-			[
-				"u-ce",
-				"u-center-horizontal"
-			],
-			[
-				"u-cen",
-				"u-center-horizontal"
-			],
-			[
-				"min-",
-				"min-height\tproperty"
-			],
-			[
-				"padding",
-				"padding-left\tproperty"
-			],
-			[
-				"max",
-				"max-height\tproperty"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "main.lua",
+			"settings":
+			{
+				"buffer_size": 1805,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "function love.load()"
+			}
+		},
+		{
+			"file": "src/Player.lua",
+			"settings":
+			{
+				"buffer_size": 2861,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "class = require \"classic\""
+			}
+		},
+		{
+			"file": "src/GameObject.lua",
+			"settings":
+			{
+				"buffer_size": 718,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -784,10 +812,26 @@
 	},
 	"expanded_folders":
 	[
-		"/D/MEGA/PROJECTS/lowrezjam2018"
+		"/D/MEGA/PROJECTS/lowrezjam2018",
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src"
 	],
 	"file_history":
 	[
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib/lume.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib/anim8.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/GameObject.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Map.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Rectangle.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/helper.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/cardinalDirections.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/camera.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Game.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/conf.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/IOU.md",
+		"/D/MEGA/PROJECTS/lowrezjam2018/lib/maid64.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/debug.bat",
+		"/D/MEGA/PROJECTS/lowrezjam2018/.editorconfig",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/entities/Player.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/lib/gamera.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/systems/Camera.lua",
@@ -795,23 +839,18 @@
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/components/Camera.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/systems/Input.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/main.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/camera.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/camera",
-		"/D/MEGA/PROJECTS/lowrezjam2018/.editorconfig",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/systems/Update.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/systems/Draw.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/components/MovementController.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/conf.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/components/Position.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/components/Sprite.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/systems/update.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/IOU.md",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/instances/game.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/lib/concord/init.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/components/sprite.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/entities/player.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/components/player.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/debug.bat",
 		"/D/MEGA/PROJECTS/lowrezjam2018/README.md",
 		"/D/Directories/Programs/re4hd/re4hdproject-install-log.txt",
 		"/C/Users/user/Downloads/Program Downloads/maid64-LOWREZJAM2018/maid64.lua",
@@ -906,26 +945,18 @@
 		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Hug Arena.p8",
 		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Celeste Classic.p8",
 		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/PICORACER-2048.p8",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Dusk Child v1.4.p8",
-		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Celeste Classic v1.0.p8",
-		"/C/Users/user/AppData/Roaming/pico-8/carts/downloads/celeste.p8",
-		"/D/XAMPP/htdocs/thundertome/public/assets/js/login.js",
-		"/D/XAMPP/htdocs/thundertome/application/controllers/Login.php",
-		"/D/XAMPP/htdocs/thundertome/application/views/login/form.html",
-		"/D/XAMPP/htdocs/thundertome/public/assets/js/debounce.js",
-		"/D/XAMPP/htdocs/thundertome/application/views/journal/search/bar.html",
-		"/D/XAMPP/htdocs/thundertome/application/views/journal/search/results.html",
-		"/D/XAMPP/htdocs/thundertome/application/config/config.php"
+		"/C/Users/user/Downloads/Program Downloads/pico-8/carts/Dusk Child v1.4.p8"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
 		"height": 178.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -933,6 +964,31 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"2",
+			"clamp",
+			"self.cel.width",
+			"])\n",
+			"key",
+			"boundingBox",
+			"BoundingBox",
+			"boundingBox",
+			"BoundingBox",
+			"halfwid",
+			"setMap",
+			"halfHeight",
+			"halfWidth",
+			"walkForwards",
+			"walkDownwards",
+			"walkUpwards",
+			"self.directions",
+			"directrion",
+			"animation",
+			"Speed",
+			"r",
+			"(\n",
+			"x",
+			"y",
+			"0"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -940,6 +996,11 @@
 		"regex": false,
 		"replace_history":
 		[
+			"celWidth",
+			"setMap",
+			"walkDown",
+			"walkUp",
+			"directions"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -950,8 +1011,104 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "main.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1805,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1288,
+								1288
+							]
+						],
+						"settings":
+						{
+							"auto_name": "function love.load()",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Player.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2861,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2043,
+								2043
+							]
+						],
+						"settings":
+						{
+							"auto_name": "class = require \"classic\"",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/GameObject.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 718,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -986,6 +1143,10 @@
 		]
 	},
 	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 127.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -994,7 +1155,7 @@
 	"project": "lowrezjam2018.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 73.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1003,6 +1164,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"game",
+				"src\\GameObject.lua"
+			],
+			[
+				"anim",
+				"lib\\anim8.lua"
+			],
 			[
 				"gamer",
 				"lib\\gamera.lua"
@@ -1070,10 +1239,6 @@
 			[
 				"sp",
 				"src\\components\\sprite.lua"
-			],
-			[
-				"game",
-				"src\\GameObject.cpp"
 			],
 			[
 				"bal",

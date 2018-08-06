@@ -5,26 +5,34 @@ local GameObject = class:extend()
 
 function GameObject:new()
 	self.destroyed = false
+	self.depth = 0
 end
 
 function GameObject:update(deltaTime)
-	self.animation:update(deltaTime)
+	if self.animation then
+		self.animation.motion:update(deltaTime)
+	end
 end
 
-function GameObject:draw(centred)
-	if centred then
-		self.animation:draw(
-			self.spritesheet,
-			self.x - self.halfWidth,
-			self.y - self.halfHeight
+function GameObject:draw()
+	if self.animation then
+		self.animation.motion:draw(
+			self.animation.spritesheet,
+			self.x - (self.cel.width / 2),
+			self.y - (self.cel.height / 2)
 		)
 	else
-		self.animation:draw(
-			self.spritesheet,
-			self.x,
-			self.y
+		love.graphics.draw(
+			self.image,
+			self.x - (self.cel.width / 2),
+			self.y - (self.cel.width / 2)
 		)
 	end
+end
+
+function GameObject:setWorld(right, bottom)
+	self.worldRight = right
+	self.worldBottom = bottom
 end
 
 return GameObject

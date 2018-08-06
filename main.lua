@@ -2,27 +2,29 @@ local maid64 = require "lib.maid64"
 local anim8 = require "lib.anim8"
 
 local Map = require "src.Map"
+local maps = require "src.maps"
 local camera = require "src.camera"
 
-function setmap(name)
+function setMap(name)
+	currentMap.nextMap = nil
 	currentMap = maps[name]
-	camera:setWorld(0, 0, currentMap:getWidth(), currentMap:getHeight())
-	currentMap:getPlayer():setWorld(currentMap:getWidth(), currentMap:getHeight())
+	camera:setWorld(0, 0, currentMap:getDimensions())
+	currentMap:getPlayer():setWorld(currentMap:getDimensions())
 end
 
 function love.load()
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
-	maps = {}
-	maps["testmap"] = Map("res/testmap.lua")
-	setmap("testmap")
-
-	-- Using maid64 instead of love ensures that
-	-- nearest neighbor scaling is used
-	background = maid64.newImage("res/background.jpg")
+	-- Configure the starting map
+	currentMap = {}
+	setMap("untitled")
 end
 
 function love.update(deltaTime)
+	if currentMap.nextMap then
+		setMap(currentMap.nextMap)
+	end
+
 	currentMap:update(deltaTime)
 
 	-- Follow player always
@@ -40,8 +42,6 @@ function love.draw(deltaTime)
 		camera:draw(function (left, top, width, height)
 			-- Default to a black background
 			love.graphics.clear(0, 0, 0)
-			-- Draw a simple background to show movement from the camera
-			love.graphics.draw(background)
 			currentMap:draw(-left, -top) -- STI needs offsets passed to it directly
 		end)
 	maid64.finish()

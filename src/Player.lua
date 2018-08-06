@@ -1,27 +1,110 @@
 local class = require "lib.classic"
 local maid64 = require "lib.maid64"
 local anim8 = require "lib.anim8"
-local helper = require "src.helper"
-local directions = require "src.cardinalDirections"
+local lume = require "lib.lume"
 
 local GameObject = require "src.GameObject"
+local Rectangle = require "src.Rectangle"
 local Player = GameObject:extend()
 
-function Player:new()
-	-- Get a reference to the spritesheet image for the player
-	self.spritesheet = maid64.newImage("res/player.png")
-	
-	-- Create a table for all of the animations that the player will use
-	-- TODO: Make a function for this using loops
-	self.animations = self:getAnimations()
+-- NOTE: This needs to be consistant across all animations
+local celWidth = 16
+local celHeight = celWidth
 
-	-- Set a default animation
-	self.animation = self.animations.walkDown
-	self.direction = directions.down
+function Player:new()
+	self.cel = Rectangle(celWidth, celHeight)
+	self.animations = anim8.getAnimations({
+		-- Idling
+		idleUp = {
+			path = "res/player/idle/up.png",
+			duration = 2
+		},
+		idleDown = {
+			path = "res/player/idle/down.png",
+			duration = 2
+		},
+		idleLeft = {
+			path = "res/player/idle/left.png",
+			duration = 2
+		},
+		idleRight = {
+			path = "res/player/idle/right.png",
+			duration = 2
+		},
+		-- Walking
+		walkUp = {
+			path = "res/player/walk/up.png",
+			duration = 0.1
+		},
+		walkDown = {
+			path = "res/player/walk/down.png",
+			duration = 0.1
+		},
+		walkLeft = {
+			path = "res/player/walk/left.png",
+			duration = 0.1
+		},
+		walkRight = {
+			path = "res/player/walk/right.png",
+			duration = 0.1
+		}
+	},
+	celWidth,
+	celHeight)
+
+	self.states = {}
+	self.states.normal = function (deltaTime)
+		local up = love.keyboard.isDown("w") or love.keyboard.isDown("up")
+		local down = love.keyboard.isDown("s") or love.keyboard.isDown("down")
+		local left = love.keyboard.isDown("a") or love.keyboard.isDown("left")
+		local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
+		local horizontal = 0
+		local vertical = 0
+		local moving = up or down or left or right
+
+		-- Movement
+		-- Horizontal
+		if left then
+			horizontal = -1
+		elseif right then
+			horizontal = 1
+		else
+			horizontal = 0
+		end
+
+		-- Vertical
+		if up then
+			vertical = -1
+		elseif down then
+			vertical = 1
+		else
+			vertical = 0
+		end
+
+		if not moving then
+			self.animation = self.animations.idleDown
+		end
+
+		-- Move within the boundaries of the current world
+		self.x = self.x + self.speed * horizontal * deltaTime
+		self.y = self.y + self.speed * vertical * deltaTime
+		self.x = lume.clamp(
+			self.x,
+			(self.boundingBox.width / 2),
+			self.worldRight - (self.boundingBox.width / 2)
+		)
+		self.y = lume.clamp(
+			self.y,
+			(self.boundingBox.height / 2),
+			self.worldBottom - (self.boundingBox.height / 2)
+		)
+	end
+
+	self.state = self.states.normal
+	self.animation = self.animations.idleDown
 	self.x = 0
 	self.y = 0
-	self.halfWidth = 8
-	self.halfHeight = 8
+	self.boundingBox = Rectangle(6, 12)
 	self.speed = 32
 	self.worldRight = 512
 	self.worldBottom = 512
@@ -31,100 +114,11 @@ function Player:update(deltaTime)
 	-- Call the superclass
 	self.super.update(self, deltaTime)
 
-	local up = love.keyboard.isDown("w") or love.keyboard.isDown("up")
-	local down = love.keyboard.isDown("s") or love.keyboard.isDown("down")
-	local left = love.keyboard.isDown("a") or love.keyboard.isDown("left")
-	local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
-	local moving = up or down or left or right
-
-	-- Movement
-	-- Horizontal
-	if up then
-		self.y = self.y - self.speed * deltaTime
-		self.direction = directions.up
-	elseif down then
-		self.y = self.y + self.speed * deltaTime
-		self.direction = directions.down
-	end
-
-	-- Vertical
-	if left then
-		self.x = self.x - self.speed * deltaTime
-		self.direction = directions.left
-	elseif right then
-		self.x = self.x + self.speed * deltaTime
-		self.direction = directions.right
-	end
-
-	-- Clamp the player's position
-	self.x = helper.clamp(self.x, self.halfWidth, self.worldRight - self.halfWidth)
-	self.y = helper.clamp(self.y, self.halfHeight, self.worldBottom - self.halfHeight)
-
-	if self.direction == directions.up and moving then
-		self.animation = self.animations.walkUp
-	elseif self.direction == directions.down and moving then
-		self.animation = self.animations.walkDown
-	elseif self.direction == directions.left and moving then
-		self.animation = self.animations.walkLeft
-	elseif self.direction == directions.right and moving then
-		self.animation = self.animations.walkRight
-	end
-
-	if moving then
-		self.animation:resume()
-	else
-		self.animation:pause()
-	end
+	self.state(deltaTime)
 end
 
-function Player:getAnimations()
-	local celWidth = 16
-	local celHeight = celWidth
-	-- Cut that spritesheet up into a grid
-	local grid = anim8.newGrid(
-		celWidth, -- Cel width
-		celHeight, -- Cel height
-		self.spritesheet:getWidth(), -- Spritesheet width
-		self.spritesheet:getHeight() -- Spritesheet height
-	)
-	local animations = {}
-
-	-- Walking
-	animations.walkDown = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			1 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	animations.walkUp = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			4 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	animations.walkLeft = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			3 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-	animations.walkRight = anim8.newAnimation(
-		grid(
-			'1-8', -- Cels used
-			2 -- Row
-		),
-		0.1 -- Duration per cel
-	)
-
-	return animations
-end
-
-function Player:setWorld(right, bottom)
-	self.worldRight = right
-	self.worldBottom = bottom
+function Player:draw()
+	self.super.draw(self)
 end
 
 return Player

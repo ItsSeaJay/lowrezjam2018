@@ -27,6 +27,8 @@ local anim8 = {
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   ]]
 }
+-- Used for getting multiple animations from meta data
+local maid64 = require "lib.maid64"
 
 local Grid = {}
 
@@ -90,6 +92,47 @@ function Grid:getFrames(...)
   end
 
   return result
+end
+
+local function getAnimations(data, celWidth, celHeight)
+	local animations = {}
+	local debugInfo = debug.getinfo(1, 'S')
+
+	-- Create new animations for each spritesheet found
+	for key, animation in pairs(data) do
+		if love.filesystem.getInfo(animation.path) then
+			local spritesheet = maid64.newImage(animation.path)
+			local grid = anim8.newGrid(
+				celWidth,
+				celHeight,
+				spritesheet:getWidth(),
+				spritesheet:getHeight()
+			)
+			-- NOTE: The cel width must fit into the spritesheet exactly
+			local range = '1-' .. (spritesheet:getWidth() / celWidth)
+			local duration = animation.duration or 1 -- Default to 1 second
+			local animation = anim8.newAnimation(
+				grid:getFrames(
+					range,
+					1 -- Row
+					-- NOTE: This is designed to work with horizontal strips of
+					--       individual animations. There's no reason why this
+					--       shouldn't be on the top row.
+				),
+				duration
+			)
+
+			-- Store the animation info in the table under the specified key
+			animations[key] = {
+				spritesheet = spritesheet,
+				motion = animation -- I couldn't think of a better name! (Sea Jay)
+			}
+		else
+			print(debugInfo.source, "WARNING!", path, "does not exist!")
+		end
+	end
+
+	return animations
 end
 
 local Gridmt = {
@@ -298,5 +341,6 @@ end
 
 anim8.newGrid       = newGrid
 anim8.newAnimation  = newAnimation
+anim8.getAnimations = getAnimations
 
 return anim8

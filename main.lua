@@ -83,6 +83,10 @@ function love.keypressed(key, scancode, isRepeat)
 	if key == "escape" then
 		love.event.quit()
 	end
+
+	if key == "space" then
+		messageBox:advance()
+	end
 end
 
 function love.resize(width, height)

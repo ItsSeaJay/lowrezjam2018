@@ -3,9 +3,11 @@ local maid64 = require "lib.maid64"
 local lume = require "lib.lume"
 
 local Map = require "src.Map"
+local MessageBox = require "src.MessageBox"
 local Light = require "src.Light"
 local LightingSystem = require "src.LightingSystem"
 
+local fonts = require "src.fonts"
 local maps = require "src.maps"
 local camera = require "src.camera"
 
@@ -35,29 +37,8 @@ function love.load()
 		0.80 -- Alpha
 	)
 
-	-- Create a list of global fonts to use later
-	fonts = {}
-	fonts.tiny = love.graphics.newFont("res/fonts/tiny/tiny.ttf", 6)
-	fonts.m3x6 = love.graphics.newFont("res/fonts/m3x6/m3x6.ttf", 16)
-	fonts.xeniatype2 = love.graphics.newImageFont(
-		"res/fonts/xeniatype2/xeniatype2.png", -- File path
-		-- Glyphs
-		" " .. 
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" ..
-		"abcdefghijklmnopqrstuvwxyz" .. 
-		"1234567890" ..
-		".,!?':;-+=&#@|"
-	)
-	fonts.tomThumbNew = love.graphics.newImageFont(
-		"res/fonts/tomThumbNew/tomThumbNewASCIISpritefont.png",
-		" !\"#$%'()*+,-./" ..
-		"0123456789" ..
-		":;<=>?@" ..
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" ..
-		"[\\]^_" ..
-		"abcdefghijklmnopqrstuvwxyz" ..
-		"{|}~`"
-	)
+	-- Test a message box
+	messageBox = MessageBox()
 end
 
 function love.update(deltaTime)
@@ -72,6 +53,7 @@ function love.update(deltaTime)
 	-- NOTE: We're probably going to want some kind of dynamic camera soon,
 	--       but this will do for now
 	camera:setPosition(currentMap:getPlayer().x, currentMap:getPlayer().y)
+	messageBox:update(deltaTime)
 end
 
 function love.draw(deltaTime)
@@ -92,8 +74,7 @@ function love.draw(deltaTime)
 
 		-- Anything that needs to be scaled, but sit on top of the camera's view
 		-- should go down here
-		love.graphics.setFont(fonts.tomThumbNew)
-		love.graphics.print("Pack my box with\nfive dozen liquor\njugs!", 2, 2)
+		messageBox:draw()
 	maid64.finish()
 end
 

@@ -1,8 +1,8 @@
 local class = require "lib.classic"
 -- Simple Tiled Implementation
 local sti = require "lib.sti"
-local Player = require "src.Player"
 
+local Player = require "src.Player"
 local Map = class:extend()
 
 function Map:new(path)

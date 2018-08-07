@@ -34,18 +34,20 @@ function MessageBox:draw()
 end
 
 function MessageBox:advance()
-	print("script", self.script)
-	print("hasNext()", self.script:hasNext())
-
-	if self.script:hasNext() then
-		if self.message.delta < string.len(self.message.target) then
-			self.message.delta = string.len(self.message.target)
-		else
-			self.message.target = self.script:next().msg
-			self.message.current = ""
-			self.message.delta = 0
-		end
-	end
+    if self.script:hasNext() then
+        if self.message.delta < string.len(self.message.target) then
+            self.message.delta = string.len(self.message.target)
+        else
+            local node = self.script:next()
+            if node then
+                self.message.target = node.msg
+                self.message.current = ""
+                self.message.delta = 0
+            else
+                self.visible = false
+            end
+        end
+    end
 end
 
 return MessageBox

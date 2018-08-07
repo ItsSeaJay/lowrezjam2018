@@ -40,9 +40,23 @@ function love.load()
 	fonts.tiny = love.graphics.newFont("res/fonts/tiny/tiny.ttf", 6)
 	fonts.m3x6 = love.graphics.newFont("res/fonts/m3x6/m3x6.ttf", 16)
 	fonts.xeniatype2 = love.graphics.newImageFont(
-		"res/fonts/xeniatype2/xeniatype2.png",
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890" ..
+		"res/fonts/xeniatype2/xeniatype2.png", -- File path
+		-- Glyphs
+		" " .. 
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" ..
+		"abcdefghijklmnopqrstuvwxyz" .. 
+		"1234567890" ..
 		".,!?':;-+=&#@|"
+	)
+	fonts.tomThumbNew = love.graphics.newImageFont(
+		"res/fonts/tomThumbNew/tomThumbNewASCIISpritefont.png",
+		" !\"#$%'()*+,-./" ..
+		"0123456789" ..
+		":;<=>?@" ..
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" ..
+		"[\\]^_" ..
+		"abcdefghijklmnopqrstuvwxyz" ..
+		"{|}~`"
 	)
 end
 
@@ -78,8 +92,8 @@ function love.draw(deltaTime)
 
 		-- Anything that needs to be scaled, but sit on top of the camera's view
 		-- should go down here
-		love.graphics.setFont(fonts.xeniatype2)
-		love.graphics.print("Hello, World!", 2, 2)
+		love.graphics.setFont(fonts.tomThumbNew)
+		love.graphics.print("Pack my box with\nfive dozen liquor\njugs!", 2, 2)
 	maid64.finish()
 end
 

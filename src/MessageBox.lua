@@ -9,16 +9,27 @@ local MessageBox = class:extend()
 
 function MessageBox:new()
 	self.script = erogodic(script)
+
+	local node = self.script:next()
+
+	self.characterLimit = 17 -- This looks like a magic number, but under the
+	                         -- default font, 16 / 4 = 16 characters max.
+
+	-- Create variables for the messages and how they should appear
 	self.message = {}
-	self.message.target = lume.wordwrap(self.script:next().msg, 16)
+	self.message.target = lume.wordwrap(
+		node.msg,
+		self.characterLimit
+	)
 	self.message.current = ""
 	self.message.delta = 0
 	self.message.speed = 16
+	
+	-- Create seperate Love2D text objects so that the text displays properly
 	self.text = love.graphics.newText(
 		fonts.tomThumbNew,
 		self.message.current
 	)
-	self.characterLimit = 18
 	self.margin = 2
 	self.visible = true
 end
@@ -43,7 +54,9 @@ end
 function MessageBox:draw()
 	if self.visible then
 		love.graphics.draw(
-			self.text
+			self.text,
+			self.margin,
+			64 - self.text:getHeight()
 		)
 	end
 end
@@ -58,9 +71,9 @@ function MessageBox:advance()
 
             if node then
                 self.message.target = lume.wordwrap(
-                	node.msg,
-                	self.characterLimit
-                )
+			    	self.script:next().msg,
+			    	self.characterLimit
+			    )
                 self.message.current = ""
                 self.message.delta = 0
             else

@@ -8,7 +8,7 @@ return {
   height = 16,
   tilewidth = 8,
   tileheight = 8,
-  nextobjectid = 1,
+  nextobjectid = 7,
   properties = {},
   tilesets = {
     {
@@ -317,6 +317,31 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "Events",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 5,
+          name = "Player",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 64,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
       }
     }
   }

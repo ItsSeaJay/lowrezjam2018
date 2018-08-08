@@ -37,14 +37,14 @@ function MessageBox:new()
 	-- Then fill in the rest of the information about this class
 	self.margin = 2
 	self.indicator = love.graphics.newImage("res/messageIndicator.png")
-	self.visible = true
+	self.visible = false
 	self.gradient = Gradient(
-		0,
-		64,
-		64,
-		0
+		0, -- x
+		64, -- y
+		64, -- width
+		0 -- height
 	)
-	self.height = -(self.text:getHeight() + self.margin)
+	self.targetHeight = -(self.text:getHeight() + self.margin)
 	self.alpha = 0
 	self.fadeSpeed = 2
 end
@@ -68,13 +68,13 @@ function MessageBox:update(deltaTime)
 	-- Add some animation in there with linear interpolation
 	self.gradient.height = lume.lerp(
 		self.gradient.height,
-		self.height,
+		self.targetHeight,
 		self.fadeSpeed * deltaTime
 	)
 
 	-- Fade out the box it isn't visible
 	if not self.visible then
-		self.height = 0
+		self.targetHeight = 0
 	end
 end
 

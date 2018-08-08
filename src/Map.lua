@@ -6,21 +6,21 @@ local Player = require "src.Player"
 local Map = class:extend()
 
 function Map:new(path)
-	self.stimap = sti(path)
-	self.mainLayer = self.stimap.layers[1]
+	self.tilemap = sti(path)
+	self.mainLayer = self.tilemap.layers[1]
 	self.gameObjects = {}
-	self.playerObj = Player(32, 32)
-	table.insert(self.gameObjects, self.playerObj)
-end
 
-function Map:spawn(gameObject, x, y)
-	table.insert(self.gameObjects, gameObject)
-
-	return gameObject
+	for key, object in pairs(self.tilemap.objects) do
+		if object.name == "Player" then
+			-- Put the player object at their spawn point
+			self.playerObj = Player(object.x, object.y)
+			table.insert(self.gameObjects, self.playerObj)
+		end
+	end
 end
 
 function Map:update(dt)
-    self.stimap:update(dt)
+    self.tilemap:update(dt)
 
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:update(dt)
@@ -29,7 +29,7 @@ function Map:update(dt)
 end
 
 function Map:draw(tx, ty, sx, sy)
-    self.stimap:draw(tx, ty, sx, sy)
+    self.tilemap:draw(tx, ty, sx, sy)
 
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:draw(true)
@@ -50,7 +50,7 @@ function Map:safeGetTile(x, y)
 end
 
 function Map:getDimensions()
-	return self.stimap.tilewidth * self.mainLayer.width, self.stimap.tileheight * self.mainLayer.height
+	return self.tilemap.tilewidth * self.mainLayer.width, self.tilemap.tileheight * self.mainLayer.height
 end
 
 function Map:collide(go)
@@ -64,19 +64,19 @@ function Map:collide(go)
 
 	for i = -n, n, n do
 		-- Right
-		x, y = self.stimap:convertPixelToTile(go.x + go.boundingBox.width / 2, go.y + i)
+		x, y = self.tilemap:convertPixelToTile(go.x + go.boundingBox.width / 2, go.y + i)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.x = (x)*self.stimap.tilewidth - go.boundingBox.width / 2
+			go.x = (x)*self.tilemap.tilewidth - go.boundingBox.width / 2
 		end
 
 		-- Left
-		x, y = self.stimap:convertPixelToTile(go.x - go.boundingBox.width / 2, go.y + i)
+		x, y = self.tilemap:convertPixelToTile(go.x - go.boundingBox.width / 2, go.y + i)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.x = (x+1)*self.stimap.tilewidth + go.boundingBox.width / 2
+			go.x = (x+1)*self.tilemap.tilewidth + go.boundingBox.width / 2
 		end
 	end
 
@@ -84,19 +84,19 @@ function Map:collide(go)
 
 	for i = -n, n, n do
 		-- Up
-		x, y = self.stimap:convertPixelToTile(go.x + i, go.y - go.boundingBox.height / 2)
+		x, y = self.tilemap:convertPixelToTile(go.x + i, go.y - go.boundingBox.height / 2)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.y = (y+1)*self.stimap.tileheight + go.boundingBox.height / 2
+			go.y = (y+1)*self.tilemap.tileheight + go.boundingBox.height / 2
 		end
 
 		-- Down
-		x, y = self.stimap:convertPixelToTile(go.x + i, go.y + go.boundingBox.height / 2)
+		x, y = self.tilemap:convertPixelToTile(go.x + i, go.y + go.boundingBox.height / 2)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.y = (y) * self.stimap.tileheight - go.boundingBox.height / 2
+			go.y = (y) * self.tilemap.tileheight - go.boundingBox.height / 2
 		end
 	end
 end

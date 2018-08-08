@@ -42,9 +42,11 @@ function MessageBox:new()
 		0,
 		64,
 		64,
-		-48 -- Stored as a negative number to go bottom up
+		0
 	)
-	self.height = self.text:height() + self.margin
+	self.height = -(self.text:getHeight() + self.margin)
+	self.alpha = 0
+	self.fadeSpeed = 2
 end
 
 function MessageBox:update(deltaTime)
@@ -62,14 +64,16 @@ function MessageBox:update(deltaTime)
 	)
 	-- Configure the text to use the current message at all times
 	self.text:set(self.message.target)
+
+	-- Add some animation in there with linear interpolation
 	self.gradient.height = lume.lerp(
 		self.gradient.height,
-		-self.height,
-		deltaTime
+		self.height,
+		self.fadeSpeed * deltaTime
 	)
 
 	-- Fade out the box it isn't visible
-	if not visible then
+	if not self.visible then
 		self.height = 0
 	end
 end

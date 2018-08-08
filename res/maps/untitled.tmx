@@ -41,7 +41,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Events">
-  <object id="5" name="Player" x="64" y="64" width="8" height="8"/>
+ <objectgroup name="Spawners">
+  <object id="5" name="Player" x="16" y="96" width="8" height="8"/>
  </objectgroup>
 </map>

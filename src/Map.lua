@@ -10,6 +10,7 @@ function Map:new(path)
 	self.mainLayer = self.tilemap.layers[1]
 	self.gameObjects = {}
 
+	-- Create objects based on those in the map
 	for key, object in pairs(self.tilemap.objects) do
 		if object.name == "Player" then
 			-- Put the player object at their spawn point
@@ -17,6 +18,9 @@ function Map:new(path)
 			table.insert(self.gameObjects, self.playerObj)
 		end
 	end
+
+	-- Remove the unneeded layer
+	self.tilemap:removeLayer("Spawners")
 end
 
 function Map:update(dt)

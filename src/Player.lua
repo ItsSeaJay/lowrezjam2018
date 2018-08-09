@@ -59,33 +59,11 @@ function Player:new(x, y)
 		local down = love.keyboard.isDown("s") or love.keyboard.isDown("down")
 		local left = love.keyboard.isDown("a") or love.keyboard.isDown("left")
 		local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
-		local horizontal, vertical
 		local moving = up or down or left or right
 
 		-- Movement
-		-- Horizontal
-		if left then
-			horizontal = -1
-			self.direction = "left"
-		elseif right then
-			horizontal = 1
-			self.direction = "right"
-		else
-			horizontal = 0
-		end
+		self:move(up, down, left, right)
 
-		-- Vertical
-		if up then
-			vertical = -1
-			self.direction = "up"
-		elseif down then
-			vertical = 1
-			self.direction = "down"
-		else
-			vertical = 0
-		end
-
-		-- Handle the animations for this state
 		if moving then
 			if self.direction == "up" then
 				self.animation = self.animations.walkUp
@@ -107,20 +85,6 @@ function Player:new(x, y)
 				self.animation = self.animations.idleRight
 			end
 		end
-
-		-- Move within the boundaries of the current world
-		self.x = self.x + self.speed * horizontal * deltaTime
-		self.y = self.y + self.speed * vertical * deltaTime
-		self.x = lume.clamp(
-			self.x,
-			(self.boundingBox.width / 2),
-			self.worldRight - (self.boundingBox.width / 2)
-		)
-		self.y = lume.clamp(
-			self.y,
-			(self.boundingBox.height / 2),
-			self.worldBottom - (self.boundingBox.height / 2)
-		)
 
 		-- Allow the player to ready their weapon with shift
 		-- TODO: tie this to the 'gun' item in the player's inventory
@@ -133,7 +97,6 @@ function Player:new(x, y)
 		local down = love.keyboard.isDown("s") or love.keyboard.isDown("down")
 		local left = love.keyboard.isDown("a") or love.keyboard.isDown("left")
 		local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
-		local horizontal, vertical
 		local moving = up or down or left or right
 		local strafing = love.keyboard.isDown("lshift")
 
@@ -143,23 +106,7 @@ function Player:new(x, y)
 		end
 
 		-- Movement
-		-- Horizontal
-		if left then
-			horizontal = -1
-		elseif right then
-			horizontal = 1
-		else
-			horizontal = 0
-		end
-
-		-- Vertical
-		if up then
-			vertical = -1
-		elseif down then
-			vertical = 1
-		else
-			vertical = 0
-		end
+		self:move(up, down, left, right, true)
 
 		-- Handle the animations for this state
 		if moving then
@@ -183,20 +130,9 @@ function Player:new(x, y)
 				self.animation = self.animations.idleRight
 			end
 		end
-
-		-- Move within the boundaries of the current world
-		self.x = self.x + self.speed * horizontal * deltaTime
-		self.y = self.y + self.speed * vertical * deltaTime
-		self.x = lume.clamp(
-			self.x,
-			(self.boundingBox.width / 2),
-			self.worldRight - (self.boundingBox.width / 2)
-		)
-		self.y = lume.clamp(
-			self.y,
-			(self.boundingBox.height / 2),
-			self.worldBottom - (self.boundingBox.height / 2)
-		)
+	end
+	self.states.reading = function(deltaTime)
+		-- Wait for the current message box script to end
 	end
 
 	self.state = self.states.normal
@@ -214,6 +150,59 @@ function Player:update(deltaTime)
 	self.super.update(self, deltaTime)
 
 	self.state(deltaTime)
+end
+
+function Player:move(up, down, left, right, strafing)
+	local horizontal, vertical
+	local changeDirection = false or not strafing
+
+	-- Horizontal
+	if left then
+		horizontal = -1
+
+		if changeDirection then
+			self.direction = "left"
+		end
+	elseif right then
+		horizontal = 1
+		
+		if changeDirection then
+			self.direction = "right"
+		end
+	else
+		horizontal = 0
+	end
+
+	-- Vertical
+	if up then
+		vertical = -1
+		
+		if changeDirection then
+			self.direction = "up"
+		end
+	elseif down then
+		vertical = 1
+
+		if changeDirection then
+			self.direction = "down"
+		end
+	else
+		vertical = 0
+	end
+
+	-- Move within the boundaries of the current world
+	self.x = self.x + self.speed * horizontal * love.timer.getDelta()
+	self.y = self.y + self.speed * vertical * love.timer.getDelta()
+	self.x = lume.clamp(
+		self.x,
+		(self.boundingBox.width / 2),
+		self.worldRight - (self.boundingBox.width / 2)
+	)
+	self.y = lume.clamp(
+		self.y,
+		(self.boundingBox.height / 2),
+		self.worldBottom - (self.boundingBox.height / 2)
+	)
 end
 
 function Player:draw()

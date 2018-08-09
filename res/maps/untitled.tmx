@@ -42,6 +42,6 @@
 </data>
  </layer>
  <objectgroup name="Spawners">
-  <object id="5" name="Player" x="16" y="96" width="8" height="8"/>
+  <object id="5" name="Player" x="24" y="32" width="8" height="8"/>
  </objectgroup>
 </map>

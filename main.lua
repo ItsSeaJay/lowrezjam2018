@@ -79,7 +79,8 @@ function love.draw(deltaTime)
 end
 
 function love.keypressed(key, scancode, isRepeat)
-	-- TODO: remove this before the game ships, or replace it
+	-- TODO: remove this before the game ships, or replace it so keys can
+	--       be rebound
 	if key == "escape" then
 		love.event.quit()
 	end

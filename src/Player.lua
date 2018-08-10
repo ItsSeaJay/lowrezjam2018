@@ -61,30 +61,10 @@ function Player:new(x, y)
 		local right = love.keyboard.isDown("d") or love.keyboard.isDown("right")
 		local moving = up or down or left or right
 
-		-- Movement
-		self:move(up, down, left, right)
+		self.speed = 32
 
-		if moving then
-			if self.direction == "up" then
-				self.animation = self.animations.walkUp
-			elseif self.direction == "down" then
-				self.animation = self.animations.walkDown
-			elseif self.direction == "left" then
-				self.animation = self.animations.walkLeft
-			elseif self.direction == "right" then
-				self.animation = self.animations.walkRight
-			end
-		else
-			if self.direction == "up" then
-				self.animation = self.animations.idleUp
-			elseif self.direction == "down" then
-				self.animation = self.animations.idleDown
-			elseif self.direction == "left" then
-				self.animation = self.animations.idleLeft
-			elseif self.direction == "right" then
-				self.animation = self.animations.idleRight
-			end
-		end
+		self:move(up, down, left, right)
+		self:animate(moving)		
 
 		-- Allow the player to ready their weapon with shift
 		-- TODO: tie this to the 'gun' item in the player's inventory
@@ -100,36 +80,15 @@ function Player:new(x, y)
 		local moving = up or down or left or right
 		local strafing = love.keyboard.isDown("lshift")
 
+		self.speed = 16
+
 		-- Return to normal when the button is release
 		if not strafing then
 			self.state = self.states.normal
 		end
 
-		-- Movement
 		self:move(up, down, left, right, true)
-
-		-- Handle the animations for this state
-		if moving then
-			if self.direction == "up" then
-				self.animation = self.animations.walkUp
-			elseif self.direction == "down" then
-				self.animation = self.animations.walkDown
-			elseif self.direction == "left" then
-				self.animation = self.animations.walkLeft
-			elseif self.direction == "right" then
-				self.animation = self.animations.walkRight
-			end
-		else
-			if self.direction == "up" then
-				self.animation = self.animations.idleUp
-			elseif self.direction == "down" then
-				self.animation = self.animations.idleDown
-			elseif self.direction == "left" then
-				self.animation = self.animations.idleLeft
-			elseif self.direction == "right" then
-				self.animation = self.animations.idleRight
-			end
-		end
+		self:animate(moving)
 	end
 	self.states.reading = function(deltaTime)
 		-- Wait for the current message box script to end
@@ -154,7 +113,7 @@ end
 
 function Player:move(up, down, left, right, strafing)
 	local horizontal, vertical
-	local changeDirection = false or not strafing
+	local changeDirection = false or (not strafing)
 
 	-- Horizontal
 	if left then
@@ -203,6 +162,30 @@ function Player:move(up, down, left, right, strafing)
 		(self.boundingBox.height / 2),
 		self.worldBottom - (self.boundingBox.height / 2)
 	)
+end
+
+function Player:animate(moving)
+	if moving then
+		if self.direction == "up" then
+			self.animation = self.animations.walkUp
+		elseif self.direction == "down" then
+			self.animation = self.animations.walkDown
+		elseif self.direction == "left" then
+			self.animation = self.animations.walkLeft
+		elseif self.direction == "right" then
+			self.animation = self.animations.walkRight
+		end
+	else
+		if self.direction == "up" then
+			self.animation = self.animations.idleUp
+		elseif self.direction == "down" then
+			self.animation = self.animations.idleDown
+		elseif self.direction == "left" then
+			self.animation = self.animations.idleLeft
+		elseif self.direction == "right" then
+			self.animation = self.animations.idleRight
+		end
+	end
 end
 
 function Player:draw()

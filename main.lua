@@ -20,6 +20,9 @@ function setMap(name, connectionID)
 	player:setWorld(currentMap:getDimensions())
 	if connectionID then
 		player:setPosition(currentMap:getDoorPos(connectionID))
+		for _, d in pairs(currentMap.doors) do
+			d.zDown = true
+		end
 	else
 		player:setPosition(currentMap:getSpawnPos())
 	end

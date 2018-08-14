@@ -23,9 +23,10 @@ function Map:new(path, player)
 			table.insert(self.gameObjects, self.playerObj)
 		end
 		if object.name == "Door" then
-			local doorObj = Door(object.x, object.y, self, object.nextMap, object.connectionID)
+			local doorObj = Door(object.x, object.y,
+								self, object.properties.nextMap, object.properties.connectionID)
 			table.insert(self.gameObjects, doorObj)
-			self.doors[object.connectionID] = doorObj
+			self.doors[object.properties.connectionID] = doorObj
 		end
 	end
 
@@ -49,7 +50,9 @@ function Map:draw(tx, ty, sx, sy)
     self.tilemap:draw(tx, ty, sx, sy)
 
 	for _, gameObject in pairs(self.gameObjects) do
-		gameObject:draw(true)
+		if gameObject.image or gameObject.animation then
+			gameObject:draw(true)
+		end
 	end
 end
 

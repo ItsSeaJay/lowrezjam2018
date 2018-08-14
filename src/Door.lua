@@ -10,18 +10,21 @@ function Door:new(x, y, map, nextMap, connectionID)
 	self.nearby = false
 end
 
-local threshold = 20
+local threshold = 10
 
 -- Use playerInteraction on GameObjects for collision and such
 function Door:playerInteraction(player)
 	self.nearby = false
 	if (math.abs(player.x - self.x) < threshold
 	and math.abs(player.y - self.y) < threshold) then
-		if love.keyboard.isDown("z") then
+		if love.keyboard.isDown("z") and not self.zDown then
 			self.map.nextMap = self.nextMap
 			self.map.connectedDoor = self.connectionID
 		end
 		self.nearby = true
+	end
+	if self.zDown and not love.keyboard.isDown("z") then
+		self.zDown = false
 	end
 end
 

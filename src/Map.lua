@@ -1,21 +1,31 @@
 local class = require "lib.classic"
 -- Simple Tiled Implementation
 local sti = require "lib.sti"
+local Door = require "src.Door"
 
-local Player = require "src.Player"
 local Map = class:extend()
 
-function Map:new(path)
+function Map:new(path, player)
 	self.tilemap = sti(path)
 	self.mainLayer = self.tilemap.layers[1]
 	self.gameObjects = {}
+	self.doors = {}
+	self.playerObj = player
+	self.spawn = {}
 
 	-- Create objects based on those in the map
 	for key, object in pairs(self.tilemap.objects) do
+		-- move this elsewhere
 		if object.name == "Player" then
 			-- Put the player object at their spawn point
-			self.playerObj = Player(object.x, object.y)
+			self.playerObj:setPosition(object.x, object.y)
+			self.spawn.x, self.spawn.y = object.x, object.y
 			table.insert(self.gameObjects, self.playerObj)
+		end
+		if object.name == "Door" then
+			local doorObj = Door(object.x, object.y, self, object.nextMap, object.connectionID)
+			table.insert(self.gameObjects, doorObj)
+			self.doors[object.connectionID] = doorObj
 		end
 	end
 
@@ -28,6 +38,9 @@ function Map:update(dt)
 
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:update(dt)
+		if gameObject.playerInteraction then
+			gameObject:playerInteraction(self.playerObj)
+		end
 		self:collide(gameObject)
 	end
 end
@@ -40,21 +53,25 @@ function Map:draw(tx, ty, sx, sy)
 	end
 end
 
-function Map:getPlayer()
-	return self.playerObj
-end
-
 function Map:safeGetTile(x, y)
 	-- For some reason need to add 1. STI is kinda bugged in a few places like this
 	if self.mainLayer.data[y + 1] then
 		return self.mainLayer.data[y + 1][x + 1]
 	end
-	
+
 	return nil
 end
 
 function Map:getDimensions()
 	return self.tilemap.tilewidth * self.mainLayer.width, self.tilemap.tileheight * self.mainLayer.height
+end
+
+function Map:getDoorPos(connectionID)
+	return self.doors[connectionID].x, self.doors[connectionID].y
+end
+
+function Map:getSpawnPos()
+	return self.spawn.x, self.spawn.y
 end
 
 function Map:collide(go)

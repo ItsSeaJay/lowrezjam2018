@@ -2,20 +2,30 @@ local anim8 = require "lib.anim8"
 local maid64 = require "lib.maid64"
 local lume = require "lib.lume"
 
-local Map = require "src.Map"
+local Player = require "src.Player"
 local MessageBox = require "src.MessageBox"
 local Light = require "src.Light"
 local LightingSystem = require "src.LightingSystem"
 
+local player = Player(0,0)
+
 local fonts = require "src.fonts"
-local maps = require "src.maps"
+local maps = require "src.maps".init(player)
 local camera = require "src.camera"
 
-function setMap(name)
+function setMap(name, connectionID)
 	currentMap.nextMap = nil
 	currentMap = maps[name]
 	camera:setWorld(0, 0, currentMap:getDimensions())
-	currentMap:getPlayer():setWorld(currentMap:getDimensions())
+	player:setWorld(currentMap:getDimensions())
+	if connectionID then
+		player:setPosition(currentMap:getDoorPos(connectionID))
+		for _, d in pairs(currentMap.doors) do
+			d.zDown = true
+		end
+	else
+		player:setPosition(currentMap:getSpawnPos())
+	end
 end
 
 function love.load()
@@ -43,7 +53,7 @@ end
 
 function love.update(deltaTime)
 	if currentMap.nextMap then
-		setMap(currentMap.nextMap)
+		setMap(currentMap.nextMap, currentMap.connectedDoor)
 	end
 
 	currentMap:update(deltaTime)
@@ -52,7 +62,7 @@ function love.update(deltaTime)
 	-- Follow the player always
 	-- NOTE: We're probably going to want some kind of dynamic camera soon,
 	--       but this will do for now
-	camera:setPosition(currentMap:getPlayer().x, currentMap:getPlayer().y)
+	camera:setPosition(player.x, player.y)
 	messageBox:update(deltaTime)
 end
 

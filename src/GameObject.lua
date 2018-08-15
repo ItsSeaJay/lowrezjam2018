@@ -35,4 +35,8 @@ function GameObject:setWorld(right, bottom)
 	self.worldBottom = bottom
 end
 
+function GameObject:setPosition(x, y)
+	self.x, self.y = x, y
+end
+
 return GameObject

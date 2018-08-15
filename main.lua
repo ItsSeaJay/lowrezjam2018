@@ -7,17 +7,17 @@ local MessageBox = require "src.MessageBox"
 local Light = require "src.Light"
 local LightingSystem = require "src.LightingSystem"
 
-local player = Player(0,0)
-
+local player = Player(0, 0)
 local fonts = require "src.fonts"
 local maps = require "src.maps".init(player)
 local camera = require "src.camera"
 
 function setMap(name, connectionID)
-	currentMap.nextMap = nil
 	currentMap = maps[name]
+	currentMap.nextMap = nil
 	camera:setWorld(0, 0, currentMap:getDimensions())
 	player:setWorld(currentMap:getDimensions())
+
 	if connectionID then
 		player:setPosition(currentMap:getDoorPos(connectionID))
 		for _, d in pairs(currentMap.doors) do
@@ -36,7 +36,7 @@ function love.load()
 
 	-- Configure the starting map
 	currentMap = {}
-	setMap("servantsCorridor")
+	setMap("untitled")
 
 	-- Configure the game's lighting system
 	lighting = LightingSystem(

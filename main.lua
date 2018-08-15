@@ -41,9 +41,7 @@ function love.load()
 
 	-- Configure the game's lighting system
 	lighting = LightingSystem(
-		{ -- Lights list
-			Light(32, 32)
-		},
+		{},
 		"#222034", -- Darkness colour
 		0.80 -- Alpha
 	)

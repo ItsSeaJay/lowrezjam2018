@@ -8,7 +8,7 @@ return {
   height = 32,
   tilewidth = 8,
   tileheight = 8,
-  nextobjectid = 2,
+  nextobjectid = 4,
   properties = {},
   tilesets = {
     {
@@ -4577,7 +4577,7 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Spawners",
+      name = "Objects",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -4597,6 +4597,22 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        },
+        {
+          id = 2,
+          name = "Door",
+          type = "",
+          shape = "rectangle",
+          x = 239.909,
+          y = 215.909,
+          width = 7.97159,
+          height = 16.2727,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connectionID"] = 0,
+            ["nextMap"] = "mainHall"
+          }
         }
       }
     }

@@ -20,6 +20,7 @@ function setMap(name, connectionID)
 
 	if connectionID then
 		player:setPosition(currentMap:getDoorPos(connectionID))
+		
 		for _, d in pairs(currentMap.doors) do
 			d.zDown = true
 		end

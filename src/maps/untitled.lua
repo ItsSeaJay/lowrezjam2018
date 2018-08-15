@@ -321,7 +321,7 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Spawners",
+      name = "Objects",
       visible = true,
       opacity = 1,
       offsetx = 0,

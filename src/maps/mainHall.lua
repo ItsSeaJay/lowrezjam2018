@@ -8,7 +8,7 @@ return {
   height = 32,
   tilewidth = 8,
   tileheight = 8,
-  nextobjectid = 4,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -4769,7 +4769,7 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Spawners",
+      name = "Objects",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -4802,6 +4802,22 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        },
+        {
+          id = 4,
+          name = "Door",
+          type = "",
+          shape = "rectangle",
+          x = 48.3977,
+          y = 192.023,
+          width = 8.22727,
+          height = 16.0114,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connectionID"] = 0,
+            ["nextMap"] = "servantsCorridor"
+          }
         }
       }
     }

@@ -22,21 +22,25 @@ function Map:new(path, player)
 			-- Put the player object at their spawn point
 			self.playerObj:setPosition(object.x, object.y)
 			self.spawn.x, self.spawn.y = object.x, object.y
+
 			table.insert(self.gameObjects, self.playerObj)
 		end
 		if object.name == "Door" then
-			local doorObj = Door(object.x, object.y,
-								self, object.properties.nextMap, object.properties.connectionID)
+			local doorObj = Door(
+				object.x,
+				object.y,
+				self,
+				object.properties.nextMap,
+				object.properties.connectionID
+			)
+			print("doro")
 			table.insert(self.gameObjects, doorObj)
 			self.doors[object.properties.connectionID] = doorObj
 		end
 	end
 
-	local raptor = Raptor(64, 64)
-	table.insert(self.gameObjects, raptor)
-
 	-- Remove the unneeded layer
-	self.tilemap:removeLayer("Spawners")
+	self.tilemap:removeLayer("Objects")
 end
 
 function Map:update(dt)

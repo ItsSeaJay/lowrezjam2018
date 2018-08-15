@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="8" tileheight="8" infinite="0" nextobjectid="2">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="8" tileheight="8" infinite="0" nextobjectid="4">
  <tileset firstgid="1" source="../houseTiles.tsx"/>
  <layer name="Tile Layer 1" width="32" height="32">
   <data encoding="csv">
@@ -37,7 +37,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Spawners">
+ <objectgroup name="Objects">
   <object id="1" name="Player" x="232.818" y="219.773" width="6.5" height="7"/>
+  <object id="2" name="Door" x="239.909" y="215.909" width="7.97159" height="16.2727">
+   <properties>
+    <property name="connectionID" type="int" value="0"/>
+    <property name="nextMap" value="mainHall"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

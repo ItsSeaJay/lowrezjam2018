@@ -36,7 +36,7 @@ function love.load()
 
 	-- Configure the starting map
 	currentMap = {}
-	setMap("untitled")
+	setMap("mainHall.lua")
 
 	-- Configure the game's lighting system
 	lighting = LightingSystem(

@@ -1,1 +1,3 @@
 - An r/earthporn user on Reddit for their landscape photograph of Sweden
+- Maurice
+- Tjakka5

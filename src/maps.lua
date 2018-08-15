@@ -11,8 +11,9 @@ function mapsInitialiser.init(player)
 	for key, file in ipairs(files) do
 		local path = "src/maps/" .. file
 		local map = Map(path, player)
-
-		maps[file] = map
+		local name = file:gsub(".lua", "")
+		
+		maps[name] = map
 	end
 
 	return maps

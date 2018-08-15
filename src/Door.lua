@@ -2,8 +2,10 @@ local GameObject = require "src.GameObject"
 
 local Door = GameObject:extend()
 
-function Door:new(x, y, map, nextMap, connectionID)
+function Door:new(x, y, width, height, map, nextMap, connectionID)
 	self:setPosition(x, y)
+	self.width = width
+	self.height = height
 	self.map = map
 	self.nextMap = nextMap
 	self.connectionID = connectionID
@@ -24,6 +26,7 @@ function Door:playerInteraction(player)
 			self.map.nextMap = self.nextMap
 			self.map.connectedDoor = self.connectionID
 		end
+
 		self.nearby = true
 	end
 
@@ -31,7 +34,5 @@ function Door:playerInteraction(player)
 		self.held = false
 	end
 end
-
---animations for opening/closing? might not be necessary but perhaps a fading to black
 
 return Door

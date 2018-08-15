@@ -29,11 +29,12 @@ function Map:new(path, player)
 			local doorObj = Door(
 				object.x,
 				object.y,
+				object.width,
+				object.height,
 				self,
 				object.properties.nextMap,
 				object.properties.connectionID
 			)
-			print("doro")
 			table.insert(self.gameObjects, doorObj)
 			self.doors[object.properties.connectionID] = doorObj
 		end

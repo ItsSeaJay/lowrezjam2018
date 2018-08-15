@@ -81,8 +81,8 @@ function Map:getDimensions()
 end
 
 function Map:getDoorCenter(connectionID)
-	return self.doors[connectionID].x,
-	       self.doors[connectionID].y
+	return self.doors[connectionID].x + self.doors[connectionID].width,
+	       self.doors[connectionID].y + self.doors[connectionID].height
 end
 
 function Map:getSpawnPos()

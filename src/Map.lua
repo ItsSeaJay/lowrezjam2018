@@ -75,11 +75,13 @@ function Map:safeGetTile(x, y)
 end
 
 function Map:getDimensions()
-	return self.tilemap.tilewidth * self.mainLayer.width, self.tilemap.tileheight * self.mainLayer.height
+	return self.tilemap.tilewidth * self.mainLayer.width,
+	       self.tilemap.tileheight * self.mainLayer.height
 end
 
-function Map:getDoorPos(connectionID)
-	return self.doors[connectionID].x, self.doors[connectionID].y
+function Map:getDoorCenter(connectionID)
+	return self.doors[connectionID].x,
+	       self.doors[connectionID].y
 end
 
 function Map:getSpawnPos()

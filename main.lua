@@ -19,8 +19,8 @@ function setMap(name, connectionID)
 	player:setWorld(currentMap:getDimensions())
 
 	if connectionID then
-		player:setPosition(currentMap:getDoorPos(connectionID))
-		
+		player:setPosition(currentMap:getDoorCenter(connectionID))
+
 		for _, d in pairs(currentMap.doors) do
 			d.zDown = true
 		end

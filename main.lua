@@ -26,7 +26,7 @@ function love.load()
 
 	-- Configure the starting map
 	currentMap = {}
-	setMap("untitled")
+	setMap("servantsCorridor")
 
 	-- Configure the game's lighting system
 	lighting = LightingSystem(

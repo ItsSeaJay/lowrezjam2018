@@ -12,6 +12,7 @@ local celWidth = 16
 local celHeight = celWidth
 
 function Player:new(x, y)
+	self.health = 4
 	self.cel = Rectangle(celWidth, celHeight)
 	self.animations = anim8.getAnimations({
 		-- Idling

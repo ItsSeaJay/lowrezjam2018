@@ -3,6 +3,7 @@ local class = require "lib.classic"
 local sti = require "lib.sti"
 
 local Player = require "src.Player"
+local Raptor = require "src.Raptor"
 local Map = class:extend()
 
 function Map:new(path)
@@ -18,6 +19,9 @@ function Map:new(path)
 			table.insert(self.gameObjects, self.playerObj)
 		end
 	end
+
+	local raptor = Raptor(64, 64)
+	table.insert(self.gameObjects, raptor)
 
 	-- Remove the unneeded layer
 	self.tilemap:removeLayer("Spawners")

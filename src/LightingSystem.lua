@@ -7,13 +7,14 @@ local LightingSystem = class:extend()
 
 function LightingSystem:new(lights, shadowColour, alpha)
 	self.lights = lights or {}
+	
 	-- Set the colour of no light using lume
 	self.shadowColour = shadowColour or "#000000"
 	self.alpha = alpha or 1
 	self.canvas = love.graphics.newCanvas()
 
 	love.graphics.setCanvas(self.mask)
-		love.graphics.clear(lume.color(self.shadowColour))
+	love.graphics.clear(lume.color(self.shadowColour))
 	love.graphics.setCanvas()
 end
 

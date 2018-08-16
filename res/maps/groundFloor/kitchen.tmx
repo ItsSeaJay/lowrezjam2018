@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="8" tileheight="8" infinite="0" nextobjectid="2">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="8" tileheight="8" infinite="0" nextobjectid="4">
  <tileset firstgid="1" source="../houseTiles.tsx"/>
  <layer name="Tile Layer 1" width="32" height="32">
   <data encoding="csv">
@@ -80,5 +80,6 @@
     <property name="nextMap" value="servantsCorridor"/>
    </properties>
   </object>
+  <object id="2" name="Ending Raptor" type="Raptor" x="123.188" y="152.063" width="9.125" height="8.75"/>
  </objectgroup>
 </map>

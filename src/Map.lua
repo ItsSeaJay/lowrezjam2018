@@ -24,6 +24,7 @@ function Map:new(path, player)
 			self.player:setPosition(object.x, object.y)
 			self.spawn.x, self.spawn.y = object.x, object.y
 		end
+
 		if object.type == "Door" then
 			local doorObj = Door(
 				object.x,
@@ -36,6 +37,11 @@ function Map:new(path, player)
 			)
 			table.insert(self.gameObjects, doorObj)
 			self.doors[object.properties.connectionID] = doorObj
+		end
+
+		if object.type == "Raptor" then
+			local raptorObj = Raptor(object.x, object.y)
+			table.insert(self.gameObjects, raptorObj)
 		end
 	end
 

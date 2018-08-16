@@ -8,7 +8,7 @@ return {
   height = 32,
   tilewidth = 8,
   tileheight = 8,
-  nextobjectid = 2,
+  nextobjectid = 4,
   properties = {},
   tilesets = {
     {
@@ -4648,6 +4648,19 @@ return {
             ["connectionID"] = 1,
             ["nextMap"] = "servantsCorridor"
           }
+        },
+        {
+          id = 2,
+          name = "Ending Raptor",
+          type = "Raptor",
+          shape = "rectangle",
+          x = 123.188,
+          y = 152.063,
+          width = 9.125,
+          height = 8.75,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     }

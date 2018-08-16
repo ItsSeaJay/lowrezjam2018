@@ -103,6 +103,12 @@ function love.draw(deltaTime)
 			-- Anything that needs to be scaled, but sit on top of the camera's view
 			-- should go down here
 			messageBox:draw()
+		elseif state == "credits" then
+			local credits = [[
+				Made by Team Atlantis
+			]]
+
+			love.grapics.print(credits, 0, 0)
 		end
 	maid64.finish()
 end

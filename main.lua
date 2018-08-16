@@ -12,6 +12,7 @@ local fonts = require "src.fonts"
 local maps = require "src.maps".init(player)
 local camera = require "src.camera"
 
+
 function setMap(name, connectionID)
 	currentMap = maps[name]
 	currentMap.nextMap = nil
@@ -35,15 +36,15 @@ function love.load()
 
 	maid64.setup(64) -- Scale the screen to 64 pixels squared
 
+	state = "title"
+
 	-- Configure the starting map
 	currentMap = {}
 	setMap("mainHall")
 
 	-- Configure the game's lighting system
 	lighting = LightingSystem(
-		{ -- Lights list
-			Light(32, 32)
-		},
+		{},
 		"#222034", -- Darkness colour
 		0.80 -- Alpha
 	)
@@ -53,18 +54,20 @@ function love.load()
 end
 
 function love.update(deltaTime)
-	if currentMap.nextMap then
-		setMap(currentMap.nextMap, currentMap.connectedDoor)
+	if state == "game" then
+		if currentMap.nextMap then
+			setMap(currentMap.nextMap, currentMap.connectedDoor)
+		end
+
+		state = currentMap:update(deltaTime)
+		lighting:update(deltaTime)
+
+		-- Follow the player always
+		-- NOTE: We're probably going to want some kind of dynamic camera soon,
+		--       but this will do for now
+		camera:setPosition(player.x, player.y)
+		messageBox:update(deltaTime)
 	end
-
-	currentMap:update(deltaTime)
-	lighting:update(deltaTime)
-
-	-- Follow the player always
-	-- NOTE: We're probably going to want some kind of dynamic camera soon,
-	--       but this will do for now
-	camera:setPosition(player.x, player.y)
-	messageBox:update(deltaTime)
 end
 
 function love.draw(deltaTime)
@@ -76,16 +79,39 @@ function love.draw(deltaTime)
 	-- NOTE: Everything between maid.start() and maid.finish() is downscaled 
 	-- NOTE: If a camera is used, it must be scaled seperately to 64 squared 
 	maid64.start()
-		-- Everything inside this function is drawn relative to the camera
-		camera:draw(function (left, top, width, height)
-			-- STI needs offsets passed to it directly
-			currentMap:draw(-left, -top)
-			lighting:draw()
-		end)
+		if state == "title" then
+			local y = 4
+			love.graphics.setFont(fonts.m3x6)
+			love.graphics.print("Nobody's Home", 4, y)
+			love.graphics.setFont(fonts.tomThumbNew)
+			y = y + 12
+			love.graphics.print("by Team Atlantis", 4, y)
+			y = y + 8
+			love.graphics.print("for LOWREZJAM", 4, y)
+			y = y + 8
+			love.graphics.print("Move with WASD", 4, y)
+			y = y + 8
+			love.graphics.print("Continue with\nSpace", 4, y)
+		elseif state == "game" then
+			-- Everything inside this function is drawn relative to the camera
+			camera:draw(function (left, top, width, height)
+				-- STI needs offsets passed to it directly
+				currentMap:draw(-left, -top)
+				lighting:draw()
+			end)
 
-		-- Anything that needs to be scaled, but sit on top of the camera's view
-		-- should go down here
-		messageBox:draw()
+			-- Anything that needs to be scaled, but sit on top of the camera's view
+			-- should go down here
+			messageBox:draw()
+		elseif state == "credits" then
+			local credits = lume.wordwrap([[Made by Team Atlantis
+Sea Jay
+Relick
+One-Eyed Weeper
+Press ESC to Quit]], 16)
+
+			love.graphics.print(credits, 2, 0)
+		end
 	maid64.finish()
 end
 
@@ -97,8 +123,13 @@ function love.keypressed(key, scancode, isRepeat)
 	end
 
 	if key == "space" then
+		if state == "title" then 
+			state = "game"
+		end
 		messageBox:advance()
 	end
+
+	currentMap:keypressed(key, scancode, isRepeat)
 end
 
 function love.resize(width, height)

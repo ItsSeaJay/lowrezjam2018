@@ -2413,12 +2413,12 @@
  </tile>
  <tile id="482">
   <properties>
-   <property name="solid" type="bool" value="false"/>
+   <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="483">
   <properties>
-   <property name="solid" type="bool" value="false"/>
+   <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="484">

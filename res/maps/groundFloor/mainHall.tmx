@@ -182,9 +182,9 @@
 </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="1" name="Player" x="123.938" y="240.006" width="8.18182" height="7.81818"/>
+  <object id="1" name="Player Spawn" type="Player" x="123.938" y="240.006" width="8.18182" height="7.81818"/>
   <object id="2" x="176.909" y="245.273" width="0.363636" height="0.363636"/>
-  <object id="4" name="Door" x="48.3977" y="192.023" width="8.22727" height="16.0114">
+  <object id="4" name="East Door" type="Door" x="44.6477" y="192.023" width="11.4148" height="15.6989">
    <properties>
     <property name="connectionID" type="int" value="0"/>
     <property name="nextMap" value="servantsCorridor"/>

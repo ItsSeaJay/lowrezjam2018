@@ -2930,13 +2930,13 @@ return {
         {
           id = 482,
           properties = {
-            ["solid"] = false
+            ["solid"] = true
           }
         },
         {
           id = 483,
           properties = {
-            ["solid"] = false
+            ["solid"] = true
           }
         },
         {
@@ -4808,10 +4808,10 @@ return {
           name = "Door",
           type = "",
           shape = "rectangle",
-          x = 48.3977,
+          x = 44.6477,
           y = 192.023,
-          width = 8.22727,
-          height = 16.0114,
+          width = 11.4148,
+          height = 15.6989,
           rotation = 0,
           visible = true,
           properties = {

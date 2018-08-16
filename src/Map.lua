@@ -13,6 +13,7 @@ function Map:new(path, player)
 	self.gameObjects = {}
 	self.doors = {}
 	self.player = player
+	table.insert(self.gameObjects, self.player)
 	self.spawn = {}
 
 	-- Create objects based on those in the map
@@ -22,8 +23,6 @@ function Map:new(path, player)
 			-- Put the player object at their spawn point
 			self.player:setPosition(object.x, object.y)
 			self.spawn.x, self.spawn.y = object.x, object.y
-
-			table.insert(self.gameObjects, self.player)
 		end
 		if object.type == "Door" then
 			local doorObj = Door(
@@ -37,7 +36,6 @@ function Map:new(path, player)
 			)
 			table.insert(self.gameObjects, doorObj)
 			self.doors[object.properties.connectionID] = doorObj
-			print("Added a door")
 		end
 	end
 
@@ -68,6 +66,10 @@ function Map:draw(tx, ty, sx, sy)
 	end
 end
 
+function Map:addObj(obj)
+	table.insert(self.gameObjects, obj)
+end
+
 function Map:safeGetTile(x, y)
 	-- For some reason need to add 1.
 	-- STI is kinda bugged in a few places like this
@@ -84,8 +86,8 @@ function Map:getDimensions()
 end
 
 function Map:getDoorCenter(connectionID)
-	return self.doors[connectionID].x + self.doors[connectionID].width,
-	       self.doors[connectionID].y + self.doors[connectionID].height
+	return self.doors[connectionID].x + self.doors[connectionID].width/2,
+	       self.doors[connectionID].y + self.doors[connectionID].height/2
 end
 
 function Map:getSpawnPos()

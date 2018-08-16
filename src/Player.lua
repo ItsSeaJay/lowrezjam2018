@@ -92,7 +92,7 @@ function Player:new(x, y)
 		self:animate(moving)
 	end
 	self.states.reading = function(deltaTime)
-		-- Wait for the current message box script to end
+		
 	end
 
 	self.state = self.states.normal

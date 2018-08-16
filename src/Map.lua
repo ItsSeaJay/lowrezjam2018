@@ -18,14 +18,14 @@ function Map:new(path, player)
 	-- Create objects based on those in the map
 	for key, object in pairs(self.tilemap.objects) do
 		-- move this elsewhere
-		if object.name == "Player" then
+		if object.type == "Player" then
 			-- Put the player object at their spawn point
 			self.player:setPosition(object.x, object.y)
 			self.spawn.x, self.spawn.y = object.x, object.y
 
 			table.insert(self.gameObjects, self.player)
 		end
-		if object.name == "Door" then
+		if object.type == "Door" then
 			local doorObj = Door(
 				object.x,
 				object.y,
@@ -37,6 +37,7 @@ function Map:new(path, player)
 			)
 			table.insert(self.gameObjects, doorObj)
 			self.doors[object.properties.connectionID] = doorObj
+			print("Added a door")
 		end
 	end
 
@@ -106,7 +107,7 @@ function Map:collide(go)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.x = (x)*self.tilemap.tilewidth - go.boundingBox.width / 2
+			go.x = (x) * self.tilemap.tilewidth - go.boundingBox.width / 2
 		end
 
 		-- Left
@@ -114,7 +115,7 @@ function Map:collide(go)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.x = (x+1)*self.tilemap.tilewidth + go.boundingBox.width / 2
+			go.x = (x + 1)*self.tilemap.tilewidth + go.boundingBox.width / 2
 		end
 	end
 
@@ -126,7 +127,7 @@ function Map:collide(go)
 		tile = self:safeGetTile(x, y)
 
 		if tile and tile.properties.solid then
-			go.y = (y+1)*self.tilemap.tileheight + go.boundingBox.height / 2
+			go.y = (y + 1) * self.tilemap.tileheight + go.boundingBox.height / 2
 		end
 
 		-- Down
@@ -142,6 +143,7 @@ end
 function Map:keypressed(key, scancode, isRepeat)
 	if key == "space" then
 		for key, object in pairs(self.gameObjects) do
+			-- Attempt to open doors
 			if object:is(Door) then
 				object:interact(self.player)
 			end

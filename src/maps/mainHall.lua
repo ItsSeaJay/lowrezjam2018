@@ -4779,8 +4779,8 @@ return {
       objects = {
         {
           id = 1,
-          name = "Player",
-          type = "",
+          name = "Player Spawn",
+          type = "Player",
           shape = "rectangle",
           x = 123.938,
           y = 240.006,
@@ -4805,8 +4805,8 @@ return {
         },
         {
           id = 4,
-          name = "Door",
-          type = "",
+          name = "East Door",
+          type = "Door",
           shape = "rectangle",
           x = 44.6477,
           y = 192.023,

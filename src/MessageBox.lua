@@ -106,28 +106,36 @@ function MessageBox:draw()
 end
 
 function MessageBox:advance()
-    if self.script:hasNext() then
-        if self.message.delta < string.len(self.message.target) then
-        	-- Skip the scrolling and show the whole message
-            self.message.delta = string.len(self.message.target)
-        else
-            local node = self.script:next()
+	if self.visible then
+		if self.script:hasNext() then
+			if self.message.delta < string.len(self.message.target) then
+				-- Skip the scrolling and show the whole message
+				self.message.delta = string.len(self.message.target)
+			else
+				local node = self.script:next()
 
-            -- If there's a node on the next line of the script
-            if node then
-            	-- Begin to show it to the player
-                self.message.target = lume.wordwrap(
-			    	node.msg,
-			    	self.characterLimit
-			    )
-                self.message.current = ""
-                self.message.delta = 0
-            else
-            	-- Dismiss the box
-                self.visible = false
-            end
-        end
-    end
+				-- If there's a node on the next line of the script
+				if node then
+					-- Begin to show it to the player
+					self.message.target = lume.wordwrap(
+						node.msg,
+						self.characterLimit
+					)
+					self.message.current = ""
+					self.message.delta = 0
+				else
+					-- Dismiss the box
+					self.visible = false
+				end
+			end
+		end	
+	end
+end
+
+function MessageBox:setScript(script)
+	self.script = erogodic(script)
+	self.visible = true
+	self:advance()
 end
 
 return MessageBox

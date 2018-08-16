@@ -105,8 +105,9 @@ function love.draw(deltaTime)
 			messageBox:draw()
 		elseif state == "credits" then
 			local credits = lume.wordwrap([[Made by Team Atlantis
-Code and Art by Sea Jay
-Concepts by One-Eyed Weeper
+Sea Jay
+Relick
+One-Eyed Weeper
 Press ESC to Quit]], 16)
 
 			love.graphics.print(credits, 2, 0)

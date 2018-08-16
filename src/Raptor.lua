@@ -17,4 +17,12 @@ function Raptor:new(x, y)
 	self.health = 3
 end
 
+function Raptor:interact(player, map)
+	local dist = math.abs(self.x - player.x) + math.abs(self.y - player.y) -- manhattan distance
+	if dist < 10 then
+		return "credits"
+	end
+	return "game"
+end
+
 return Raptor

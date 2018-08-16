@@ -51,7 +51,7 @@ end
 
 function Map:update(dt)
     self.tilemap:update(dt)
-
+	local state = "game"
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:update(dt)
 		self:collide(gameObject)
@@ -59,7 +59,12 @@ function Map:update(dt)
 		if gameObject.playerInteraction then
 			gameObject:playerInteraction(self.player)
 		end
+
+		if gameObject:is(Raptor) then
+			state = gameObject:interact(self.player)
+		end
 	end
+	return state
 end
 
 function Map:draw(tx, ty, sx, sy)

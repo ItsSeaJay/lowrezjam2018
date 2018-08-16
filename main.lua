@@ -59,7 +59,7 @@ function love.update(deltaTime)
 			setMap(currentMap.nextMap, currentMap.connectedDoor)
 		end
 
-		currentMap:update(deltaTime)
+		state = currentMap:update(deltaTime)
 		lighting:update(deltaTime)
 
 		-- Follow the player always
@@ -104,11 +104,12 @@ function love.draw(deltaTime)
 			-- should go down here
 			messageBox:draw()
 		elseif state == "credits" then
-			local credits = [[
-				Made by Team Atlantis
-			]]
+			local credits = lume.wordwrap([[Made by Team Atlantis
+Code and Art by Sea Jay
+Concepts by One-Eyed Weeper
+Press ESC to Quit]], 16)
 
-			love.grapics.print(credits, 0, 0)
+			love.graphics.print(credits, 2, 0)
 		end
 	maid64.finish()
 end

@@ -100,7 +100,7 @@ function Player:new(x, y)
 	self.x = x or 0
 	self.y = y or 0
 	self.boundingBox = Rectangle(6, 12)
-	self.speed = 32
+	self.speed = 16
 	self.worldRight = 512
 	self.worldBottom = 512
 end

@@ -1,8 +1,8 @@
 local class = require "lib.classic"
 -- Simple Tiled Implementation
 local sti = require "lib.sti"
-local Door = require "src.Door"
 
+local Door = require "src.Door"
 local Player = require "src.Player"
 local Raptor = require "src.Raptor"
 local Map = class:extend()
@@ -12,7 +12,7 @@ function Map:new(path, player)
 	self.mainLayer = self.tilemap.layers[1]
 	self.gameObjects = {}
 	self.doors = {}
-	self.playerObj = player
+	self.player = player
 	self.spawn = {}
 
 	-- Create objects based on those in the map
@@ -20,10 +20,10 @@ function Map:new(path, player)
 		-- move this elsewhere
 		if object.name == "Player" then
 			-- Put the player object at their spawn point
-			self.playerObj:setPosition(object.x, object.y)
+			self.player:setPosition(object.x, object.y)
 			self.spawn.x, self.spawn.y = object.x, object.y
 
-			table.insert(self.gameObjects, self.playerObj)
+			table.insert(self.gameObjects, self.player)
 		end
 		if object.name == "Door" then
 			local doorObj = Door(
@@ -49,10 +49,11 @@ function Map:update(dt)
 
 	for _, gameObject in pairs(self.gameObjects) do
 		gameObject:update(dt)
-		if gameObject.playerInteraction then
-			gameObject:playerInteraction(self.playerObj)
-		end
 		self:collide(gameObject)
+
+		if gameObject.playerInteraction then
+			gameObject:playerInteraction(self.player)
+		end
 	end
 end
 
@@ -67,7 +68,8 @@ function Map:draw(tx, ty, sx, sy)
 end
 
 function Map:safeGetTile(x, y)
-	-- For some reason need to add 1. STI is kinda bugged in a few places like this
+	-- For some reason need to add 1.
+	-- STI is kinda bugged in a few places like this
 	if self.mainLayer.data[y + 1] then
 		return self.mainLayer.data[y + 1][x + 1]
 	end
@@ -133,6 +135,16 @@ function Map:collide(go)
 
 		if tile and tile.properties.solid then
 			go.y = (y) * self.tilemap.tileheight - go.boundingBox.height / 2
+		end
+	end
+end
+
+function Map:keypressed(key, scancode, isRepeat)
+	if key == "space" then
+		for key, object in pairs(self.gameObjects) do
+			if object:is(Door) then
+				object:interact(self.player)
+			end
 		end
 	end
 end

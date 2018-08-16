@@ -97,6 +97,8 @@ function love.keypressed(key, scancode, isRepeat)
 	if key == "space" then
 		messageBox:advance()
 	end
+
+	currentMap:keypressed(key, scancode, isRepeat)
 end
 
 function love.resize(width, height)

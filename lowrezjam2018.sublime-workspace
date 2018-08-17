@@ -519,67 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "main.lua",
-			"settings":
-			{
-				"buffer_size": 3750,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/fonts.lua",
-			"settings":
-			{
-				"buffer_size": 635,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/MessageBox.lua",
-			"settings":
-			{
-				"buffer_size": 3648,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/Door.lua",
-			"settings":
-			{
-				"buffer_size": 721,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/Player.lua",
-			"settings":
-			{
-				"buffer_size": 4777,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/Map.lua",
-			"settings":
-			{
-				"buffer_size": 4100,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/maps/kitchen.lua",
-			"settings":
-			{
-				"buffer_size": 90061,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -849,11 +788,17 @@
 		"/D/MEGA/PROJECTS/lowrezjam2018/res",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/messages",
-		"/D/MEGA/PROJECTS/godot-boy"
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/messages"
 	],
 	"file_history":
 	[
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps/kitchen.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Map.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Player.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/Door.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/MessageBox.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/src/fonts.lua",
+		"/D/MEGA/PROJECTS/lowrezjam2018/main.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/conf.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Raptor.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/messages/locked.lua",
@@ -862,19 +807,13 @@
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/GameObject.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Gradient.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps/mainHall.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/Player.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/Door.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/Map.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/LightingSystem.lua",
 		"/D/MEGA/PROJECTS/godot-boy/Main.gd",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/MessageBox.lua",
-		"/D/MEGA/PROJECTS/lowrezjam2018/main.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps/untitled.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/messages/test.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/lib/erogodic.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/IOU.md",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/fonts.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Light.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/ASCII.txt",
 		"/D/renpy-6.99.14.3-sdk/tutorial/game/script.rpy",
@@ -980,12 +919,11 @@
 		"/D/MEGA/PROJECTS/lily-tin/build.bat",
 		"/D/MEGA/PROJECTS/lily-tin/run.bat",
 		"/D/MEGA/PROJECTS/lily-tin/bin/CMakeCache.txt",
-		"/D/MEGA/PROJECTS/lily-tin/.gitignore",
-		"/D/MEGA/PROJECTS/lily-tin/src/Transform.h"
+		"/D/MEGA/PROJECTS/lily-tin/.gitignore"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -1092,228 +1030,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "main.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3750,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3125,
-								3125
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"history_list_is_closing": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/fonts.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 635,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/MessageBox.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3648,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3485,
-								3485
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 90.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/Door.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 721,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								631,
-								631
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/Player.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4777,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2788,
-								2788
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1365.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/Map.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4100,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1648,
-								1648
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/maps/kitchen.lua",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 90061,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								607,
-								607
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Lua/Lua.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
 			]
 		}
 	],

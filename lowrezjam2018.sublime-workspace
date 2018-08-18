@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"lowre",
+				"lowrezjam2018.zip"
+			],
+			[
+				"low",
+				"lowrezjam2018.love"
+			],
+			[
 				"ad",
 				"advance"
 			],
@@ -506,19 +514,21 @@
 			[
 				"ent",
 				"entry_model"
-			],
-			[
-				"app",
-				"application_folder"
-			],
-			[
-				"syst",
-				"system_path"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "build.bat",
+			"settings":
+			{
+				"buffer_size": 812,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "@echo off"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -784,14 +794,11 @@
 	},
 	"expanded_folders":
 	[
-		"/D/MEGA/PROJECTS/lowrezjam2018",
-		"/D/MEGA/PROJECTS/lowrezjam2018/res",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps",
-		"/D/MEGA/PROJECTS/lowrezjam2018/src/messages"
+		"/D/MEGA/PROJECTS/lowrezjam2018"
 	],
 	"file_history":
 	[
+		"/C/Users/user/AppData/Local/Temp/7zO814F1A59/license.txt",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/maps/kitchen.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Map.lua",
 		"/D/MEGA/PROJECTS/lowrezjam2018/src/Player.lua",
@@ -918,8 +925,7 @@
 		"/D/MEGA/PROJECTS/lily-tin/make.bat",
 		"/D/MEGA/PROJECTS/lily-tin/build.bat",
 		"/D/MEGA/PROJECTS/lily-tin/run.bat",
-		"/D/MEGA/PROJECTS/lily-tin/bin/CMakeCache.txt",
-		"/D/MEGA/PROJECTS/lily-tin/.gitignore"
+		"/D/MEGA/PROJECTS/lily-tin/bin/CMakeCache.txt"
 	],
 	"find":
 	{
@@ -938,6 +944,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"D:\\LOVE",
+			"bin",
+			"lowrezjam2018",
 			"lockedScript",
 			"name",
 			"type",
@@ -1030,8 +1039,41 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "build.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								481,
+								481
+							]
+						],
+						"settings":
+						{
+							"auto_name": "@echo off",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
